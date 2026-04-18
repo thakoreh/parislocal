@@ -105,31 +105,53 @@ export default function Home() {
     <div>
       {/* ===== HERO ===== */}
       <section
-        className="hero-gradient"
         style={{
           minHeight: "100vh",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          padding: "120px 24px 80px",
+          padding: "120px 24px 100px",
           position: "relative",
+          backgroundImage: "url(/images/hero-paris-river.jpg)",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
         }}
       >
+        {/* Dark overlay */}
+        <div style={{
+          position: "absolute", inset: 0,
+          background: "linear-gradient(135deg, rgba(26, 58, 21, 0.88) 0%, rgba(45, 90, 39, 0.82) 40%, rgba(29, 53, 26, 0.78) 100%)",
+          zIndex: 0,
+        }} />
+        {/* Warm texture */}
+        <div style={{
+          position: "absolute", inset: 0,
+          backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+          zIndex: 1,
+        }} />
+        {/* Bottom fade */}
+        <div style={{
+          position: "absolute", bottom: 0, left: 0, right: 0, height: 180,
+          background: "linear-gradient(to top, var(--bg), transparent)",
+          zIndex: 2,
+        }} />
         <div
           style={{
             maxWidth: 800,
             width: "100%",
             textAlign: "center",
             position: "relative",
-            zIndex: 1,
+            zIndex: 3,
           }}
         >
           <span
             className="section-badge"
             style={{
               marginBottom: 24,
-              background: "rgba(245, 158, 11, 0.15)",
+              background: "rgba(217, 119, 6, 0.2)",
               color: "#fbbf24",
+              border: "1px solid rgba(217, 119, 6, 0.3)",
             }}
           >
             <MapPin size={14} />
@@ -138,23 +160,28 @@ export default function Home() {
 
           <h1
             style={{
-              fontSize: "clamp(2rem, 5vw, 3.25rem)",
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(2.25rem, 5.5vw, 3.75rem)",
               fontWeight: 800,
               color: "#ffffff",
-              lineHeight: 1.2,
+              lineHeight: 1.15,
               marginTop: 24,
               marginBottom: 20,
+              letterSpacing: "-0.01em",
             }}
           >
-            Find Trusted Local Services You Can Count On
+            Find Trusted Local Services
+            <br />
+            <span style={{ color: "var(--accent-soft, #fbbf24)" }}>You Can Count On</span>
           </h1>
 
           <p
             style={{
+              fontFamily: "var(--font-body)",
               fontSize: "1.15rem",
               color: "rgba(255, 255, 255, 0.8)",
-              lineHeight: 1.7,
-              maxWidth: 620,
+              lineHeight: 1.75,
+              maxWidth: 600,
               margin: "0 auto 40px",
             }}
           >
@@ -241,12 +268,13 @@ export default function Home() {
 
           <p
             style={{
-              fontSize: "0.85rem",
-              color: "rgba(255, 255, 255, 0.6)",
+              fontSize: "0.8rem",
+              color: "rgba(255, 255, 255, 0.5)",
               marginBottom: 48,
+              fontFamily: "var(--font-accent)",
             }}
           >
-            Popular: Plumbing, Landscaping, Snow Removal, Electrical
+            Popular: Plumbing · Landscaping · Snow Removal · Electrical
           </p>
 
           {/* Stats */}
@@ -297,7 +325,8 @@ export default function Home() {
             <span className="section-badge">Categories</span>
             <h2
               style={{
-                fontSize: "2rem",
+                fontFamily: "var(--font-heading)",
+                fontSize: "2.25rem",
                 fontWeight: 700,
                 marginTop: 16,
                 color: "var(--text)",
@@ -425,7 +454,8 @@ export default function Home() {
             <span className="section-badge">How It Works</span>
             <h2
               style={{
-                fontSize: "2rem",
+                fontFamily: "var(--font-heading)",
+                fontSize: "2.25rem",
                 fontWeight: 700,
                 marginTop: 16,
                 color: "var(--text)",
@@ -533,7 +563,8 @@ export default function Home() {
             <span className="section-badge">Featured</span>
             <h2
               style={{
-                fontSize: "2rem",
+                fontFamily: "var(--font-heading)",
+                fontSize: "2.25rem",
                 fontWeight: 700,
                 marginTop: 16,
                 color: "var(--text)",
@@ -697,7 +728,8 @@ export default function Home() {
             <span className="section-badge">About</span>
             <h2
               style={{
-                fontSize: "2rem",
+                fontFamily: "var(--font-heading)",
+                fontSize: "2.25rem",
                 fontWeight: 700,
                 marginTop: 16,
                 color: "var(--text)",

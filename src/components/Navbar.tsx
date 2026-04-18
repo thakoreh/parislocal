@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Search, MapPin, Sun, Moon } from "lucide-react";
+import { Menu, X, Search, MapPin, Sun, Moon, Leaf } from "lucide-react";
 
 const navLinks = [
   { href: "/categories", label: "Categories" },
@@ -43,10 +43,10 @@ export default function Navbar() {
           <Link
             href="/"
             className="flex items-center gap-1.5 text-xl font-bold"
-            style={{ color: "var(--text)" }}
+            style={{ color: "var(--text)", textDecoration: "none" }}
           >
-            <MapPin size={20} style={{ color: "var(--color-accent)" }} />
-            <span>
+            <Leaf size={20} style={{ color: "var(--color-primary)" }} />
+            <span style={{ fontFamily: "var(--font-heading)" }}>
               Paris<span style={{ color: "var(--color-accent)" }}>.</span>Local
             </span>
           </Link>
@@ -60,8 +60,8 @@ export default function Navbar() {
                 className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
                 style={{ color: "var(--text-secondary)" }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "var(--color-primary)";
-                  e.currentTarget.style.background = "var(--accent-glow)";
+                  e.currentTarget.style.color = "var(--primary)";
+                  e.currentTarget.style.background = "var(--green-glow)";
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = "var(--text-secondary)";

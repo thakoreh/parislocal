@@ -37,6 +37,14 @@
         "nxtPslug": "nxtPslug"
       },
       "namedRegex": "^/categories/(?<nxtPslug>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/guides/[slug]",
+      "regex": "^/guides/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/guides/(?<nxtPslug>[^/]+?)(?:/)?$"
     }
   ],
   "staticRoutes": [
@@ -65,18 +73,6 @@
       "namedRegex": "^/about(?:/)?$"
     },
     {
-      "page": "/api/contact",
-      "regex": "^/api/contact(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/api/contact(?:/)?$"
-    },
-    {
-      "page": "/api/list-business",
-      "regex": "^/api/list\\-business(?:/)?$",
-      "routeKeys": {},
-      "namedRegex": "^/api/list\\-business(?:/)?$"
-    },
-    {
       "page": "/categories",
       "regex": "^/categories(?:/)?$",
       "routeKeys": {},
@@ -89,10 +85,28 @@
       "namedRegex": "^/contact(?:/)?$"
     },
     {
+      "page": "/emergency",
+      "regex": "^/emergency(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/emergency(?:/)?$"
+    },
+    {
+      "page": "/events",
+      "regex": "^/events(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/events(?:/)?$"
+    },
+    {
       "page": "/favicon.ico",
       "regex": "^/favicon\\.ico(?:/)?$",
       "routeKeys": {},
       "namedRegex": "^/favicon\\.ico(?:/)?$"
+    },
+    {
+      "page": "/guides",
+      "regex": "^/guides(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/guides(?:/)?$"
     },
     {
       "page": "/list-your-business",
