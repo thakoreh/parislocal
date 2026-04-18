@@ -6,9 +6,11 @@ import { Menu, X, Search, MapPin, Sun, Moon } from "lucide-react";
 
 const navLinks = [
   { href: "/categories", label: "Categories" },
+  { href: "/events", label: "Events" },
+  { href: "/guides", label: "Guides" },
   { href: "/search", label: "Search", icon: Search },
+  { href: "/emergency", label: "Emergency" },
   { href: "/list-your-business", label: "List Your Business" },
-  { href: "/about", label: "About" },
 ];
 
 export default function Navbar() {

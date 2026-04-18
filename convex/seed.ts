@@ -549,3 +549,306 @@ export const seed = mutation({
     };
   },
 });
+
+// ── Events & Guides Seed ──────────────────────────────────────────
+
+const events = [
+  {
+    title: "Paris Fair 2026",
+    description: "The 169th annual Paris Fair — one of Ontario's oldest agricultural fairs. Midway rides, live entertainment, agricultural exhibits, demolition derby, and classic fair food.",
+    date: "2026-09-03",
+    endDate: "2026-09-06",
+    time: "Gates open 10am",
+    location: "Paris Fairgrounds",
+    address: "139 Silver St, Paris",
+    category: "festival" as const,
+    featured: true,
+    source: "parisfairgrounds.com — annual Labour Day weekend event",
+  },
+  {
+    title: "Paris Farmers Market",
+    description: "Weekly farmers market with local produce, baked goods, crafts, and artisan products. Runs May through October in downtown Paris.",
+    date: "2026-05-02",
+    endDate: "2026-10-31",
+    time: "Saturdays 7am–1pm",
+    location: "Lion's Park, Paris",
+    category: "market" as const,
+    featured: true,
+    source: "townofparis.com — seasonal weekly market",
+  },
+  {
+    title: "Paris to Ancaster Bike Race",
+    description: "Ontario's spring cycling classic. 70km and 40km gravel road race from Paris to Ancaster through scenic countryside.",
+    date: "2026-04-26",
+    time: "8am start",
+    location: "Paris Start Line — Downtown Paris",
+    category: "sports" as const,
+    featured: true,
+    source: "paris-to-ancaster.com — annual spring cycling event",
+  },
+  {
+    title: "Santa Claus Parade Paris",
+    description: "Annual Santa Claus Parade through downtown Paris. Floats, marching bands, and Santa himself. A beloved community tradition.",
+    date: "2026-11-28",
+    time: "2pm",
+    location: "Grand River Street North, Paris",
+    category: "community" as const,
+    featured: false,
+    source: "Paris Lions Club — annual community event",
+  },
+  {
+    title: "Canada Day Celebration",
+    description: "Family-friendly Canada Day festivities at Lion's Park. Live music, food vendors, kids activities, and fireworks at dusk.",
+    date: "2026-07-01",
+    time: "12pm–10pm",
+    location: "Lion's Park, Paris",
+    category: "community" as const,
+    featured: true,
+    source: "County of Brant — annual Canada Day event",
+  },
+  {
+    title: "Paris Studio Tour",
+    description: "Self-guided tour of local artists' studios in and around Paris. Meet the artists, see their work, and purchase original art.",
+    date: "2026-10-17",
+    endDate: "2026-10-18",
+    time: "10am–5pm",
+    location: "Various studios in Paris, ON",
+    category: "festival" as const,
+    featured: false,
+    source: "Paris Studio Tour — annual fall arts event",
+  },
+  {
+    title: "Cobblestone Festival",
+    description: "Celebrating Paris's unique cobblestone architecture. Walking tours, heritage displays, live music, and local food.",
+    date: "2026-06-13",
+    endDate: "2026-06-14",
+    time: "10am–6pm",
+    location: "Downtown Paris",
+    category: "festival" as const,
+    featured: false,
+    source: "Paris Historical Society — annual heritage celebration",
+  },
+  {
+    title: "Paris Lions Club Ribfest",
+    description: "Annual ribfest with professional BBQ teams, live entertainment, craft beer, and family activities. Fundraiser for local charities.",
+    date: "2026-08-14",
+    endDate: "2026-08-16",
+    time: "11am–11pm",
+    location: "Paris Fairgrounds",
+    category: "festival" as const,
+    featured: false,
+    source: "Paris Lions Club — annual summer fundraiser",
+  },
+];
+
+const guides = [
+  {
+    title: "New to Paris? Your Complete Welcome Guide",
+    slug: "new-resident-guide",
+    description: "Everything new residents need to know — utilities, schools, healthcare, recreation, garbage collection, and getting connected.",
+    content: `## Welcome to Paris, Ontario!
+
+Paris is a charming town of ~14,000 at the forks of the Grand and Nith Rivers in Brant County. Known as "the prettiest town in Canada," it features unique cobblestone buildings, scenic trails, and a vibrant small-town community.
+
+### Getting Set Up
+
+**Utilities:**
+- **Electricity:** Hydro One — 1-800-434-1235
+- **Natural Gas:** Enbridge Gas — 1-877-362-7603
+- **Water/Sewer:** County of Brant — (519) 442-6324
+- **Internet:** Bell, Rogers, or local providers like Execulink
+
+**Healthcare:**
+- Register with a family doctor at Paris Medical Clinic or Cobblestone Medicine
+- Paris Dental Centre and Louvre Dental for dental care
+- Brantford General Hospital is the nearest ER (15 min drive)
+
+**Schools:**
+- Paris District High School (public secondary)
+- North Ward School, Paris Central, Sacred Heart (elementary)
+- St. Patrick's Catholic School
+
+**Garbage & Recycling:**
+- Weekly curbside pickup by County of Brant
+- Green bin organics, blue box recycling
+- Check countyofbrant.ca for your pickup schedule
+
+### Getting Around
+- Paris is walkable downtown
+- Brantford Transit has limited service
+- Most residents drive — close to Highway 403
+
+### Things to Do
+- Walk the Grand River Trail
+- Visit the cobblestone buildings downtown
+- Paris Fair (Labour Day weekend)
+- Farmers Market (Saturdays, May–October)
+- Two Rivers Tour (annual cycling event)`,
+    category: "new-resident" as const,
+    published: true,
+    order: 1,
+  },
+  {
+    title: "Best Trails & Outdoor Activities in Paris",
+    slug: "trails-outdoor-guide",
+    description: "Explore Paris's scenic trails, conservation areas, and outdoor recreation spots along the Grand and Nith Rivers.",
+    content: `## Trails & Outdoors in Paris, Ontario
+
+Paris sits at the confluence of the Grand River and Nith River, offering some of the best natural scenery in Southwestern Ontario.
+
+### Top Trails
+
+**Grand River Trail (Cambridge to Paris)**
+- 18 km rail trail along the Grand River
+- Flat, crushed limestone surface — great for walking and cycling
+- Park at the Paris trailhead on West River Road
+
+**S.C. Johnson Trail (Paris to Brantford)**
+- Connects Paris to Brantford along the Grand River
+- Approximately 8 km one way
+- Part of the Trans Canada Trail network
+
+**Pennefather Park Trail**
+- Short loop trail through Pennefather Park
+- Great for families with young children
+
+### Conservation Areas
+
+**Apps' Mill Nature Centre**
+- 3 km west of Paris on Robinson Road
+- Hiking trails, nature programs, pond exploration
+- Managed by the Grand River Conservation Authority
+
+**Glen Morris to Paris Rail Trail**
+- Scenic 6 km section of the Cambridge to Paris rail trail
+- Follows the Grand River through forest and farmland
+
+### Water Activities
+- **Canoeing/Kayaking:** Launch at the forks of the Grand and Nith Rivers
+- **Fishing:** Grand River has bass, trout, and pike
+- **Swimming:** Pinehurst Lake Conservation Area (10 min drive)
+
+### Seasonal Activities
+- **Spring:** Maple syrup festivals, bird watching
+- **Summer:** Swimming, canoeing, farmers markets
+- **Fall:** Leaf peeping along the Grand River, studio tour
+- **Winter:** Cross-country skiing on the rail trails`,
+    category: "trail" as const,
+    published: true,
+    order: 2,
+  },
+  {
+    title: "Seasonal Guide: What to Do Each Season in Paris",
+    slug: "seasonal-guide",
+    description: "Your month-by-month guide to seasonal activities, events, and home maintenance in Paris, Ontario.",
+    content: `## Seasonal Guide for Paris, Ontario
+
+### Spring (March–May)
+- **Paris Farmers Market** opens first Saturday in May
+- **Maple syrup season** — visit local sugar bushes
+- **Paris to Ancaster Bike Race** (late April)
+- **Spring cleanup** — book landscaping services early
+- **Home maintenance:** Eavestrough cleaning, furnace filter change, deck inspection
+
+### Summer (June–August)
+- **Canada Day Celebration** at Lion's Park (July 1)
+- **Paris Lions Club Ribfest** (August)
+- **Canoeing and kayaking** on the Grand River
+- **Paris Studio Tour** preview events
+- **Home maintenance:** Lawn care, AC maintenance, window cleaning
+
+### Fall (September–November)
+- **Paris Fair** (Labour Day weekend) — the big one!
+- **Fall colours** along the Grand River Trail
+- **Paris Studio Tour** (October)
+- **Thanksgiving** — local turkey farms
+- **Home maintenance:** Furnace inspection, gutter cleaning, winterize outdoor taps
+
+### Winter (December–February)
+- **Santa Claus Parade** (late November/early December)
+- **Cross-country skiing** on rail trails
+- **Cobblestone buildings** look magical in snow
+- **Ice fishing** at Pinehurst Lake
+- **Home maintenance:** Snow removal (book early!), pipe insulation, humidifier`,
+    category: "seasonal" as const,
+    published: true,
+    order: 3,
+  },
+  {
+    title: "Where to Eat in Paris, Ontario",
+    slug: "dining-guide",
+    description: "The complete local dining guide — cafes, restaurants, bakeries, and hidden gems in Paris, Ontario.",
+    content: `## Dining Guide: Paris, Ontario
+
+Despite its small size, Paris has a surprisingly vibrant food scene. Here are the local favourites:
+
+### Cafes & Bakeries
+
+**Dog-Eared Café** (38 Grand River St N)
+- Bookstore + café — browse while you sip
+- Espresso, baked goods, soups, sandwiches, craft beer, VQA wines
+- A true Paris institution
+
+**Detour Cafe Paris**
+- Cozy community hub with coffee, vegan options, and breakfast sandwiches
+- Popular with the morning crowd
+
+**Little Paris Bread Co.**
+- Small batch sourdough and artisan baked goods
+- Follow on Facebook for weekly specials
+
+### Restaurants
+
+**Best Western Plus Ruby's Family Restaurant**
+- Classic Canadian comfort food
+- Breakfast served all day
+
+**Two Rivers (Seasonal)**
+- Patio dining overlooking the Grand River
+- Fine dining in a heritage setting
+
+### Quick Bites & Takeout
+
+**Paris Cabana** — ice cream and snacks (seasonal)
+**Bellstone Arms** — pub fare in a historic setting
+
+### Tips
+- Most restaurants are along Grand River Street North
+- Dog-Eared Café is the most popular spot — arrive early on weekends
+- Little Paris Bread sells out — pre-order on Facebook`,
+    category: "dining" as const,
+    published: true,
+    order: 4,
+  },
+];
+
+export const seedContent = mutation({
+  args: {},
+  handler: async (ctx) => {
+    // Check if already seeded
+    const existingGuide = await ctx.db.query("guides").first();
+    if (existingGuide) {
+      return {
+        message: "Content already seeded",
+        events: (await ctx.db.query("events").collect()).length,
+        guides: (await ctx.db.query("guides").collect()).length,
+      };
+    }
+
+    // Seed events
+    for (const event of events) {
+      await ctx.db.insert("events", event);
+    }
+
+    // Seed guides
+    for (const guide of guides) {
+      await ctx.db.insert("guides", guide);
+    }
+
+    return {
+      message: "Content seeded successfully",
+      events: events.length,
+      guides: guides.length,
+    };
+  },
+});
