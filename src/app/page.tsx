@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useQuery } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import {
   Wrench,
   Zap,
@@ -23,11 +25,20 @@ import {
   Search,
   Users,
   CheckCircle,
+  Coffee,
+  UtensilsCrossed,
+  Scissors,
+  Dumbbell,
+  Scale,
+  Building2,
+  Smile,
+  Heart,
+  PawPrint,
+  Globe,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { categories } from "@/data/categories";
-import { getFeaturedBusinesses } from "@/data/businesses";
 import FAQSection from "@/components/FAQSection";
+import type { ConvexBusiness, ConvexCategory } from "@/types/convex";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>> = {
   Wrench,
@@ -42,11 +53,19 @@ const iconMap: Record<string, React.ComponentType<{ size?: number; color?: strin
   Car,
   Truck,
   Trees,
+  UtensilsCrossed,
+  Coffee,
+  Scissors,
+  Dumbbell,
+  Scale,
+  Building2,
+  Smile,
+  Heart,
+  PawPrint,
 };
 
 function RatingStars({ rating }: { rating: number }) {
   const fullStars = Math.floor(rating);
-  const hasHalf = rating - fullStars >= 0.5;
 
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -73,10 +92,14 @@ function RatingStars({ rating }: { rating: number }) {
 }
 
 export default function Home() {
-  const featuredBusinesses = getFeaturedBusinesses();
+  const categories = useQuery(api.categories.list) as ConvexCategory[] | undefined;
+  const featuredBusinesses = useQuery(api.businesses.getFeatured, {}) as ConvexBusiness[] | undefined;
   const [searchQuery, setSearchQuery] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const router = useRouter();
+
+  const allBusinesses = useQuery(api.businesses.list, {}) as ConvexBusiness[] | undefined;
+  const totalBusinesses = allBusinesses?.length ?? 200;
 
   return (
     <div>
@@ -135,7 +158,7 @@ export default function Home() {
               margin: "0 auto 40px",
             }}
           >
-            Connect with verified plumbers, electricians, landscapers, and more
+            Connect with verified plumbers, electricians, landscapers, restaurants, and more
             in Paris, Brantford, Cambridge, and surrounding areas.
           </p>
 
@@ -236,7 +259,7 @@ export default function Home() {
             }}
           >
             {[
-              { number: "200+", label: "Local Businesses" },
+              { number: `${totalBusinesses}+`, label: "Local Businesses" },
               { number: "5,000+", label: "Happy Customers" },
               { number: "12", label: "Service Areas" },
               { number: "4.7", label: "Average Rating" },
@@ -295,95 +318,101 @@ export default function Home() {
             </p>
           </div>
 
-          <div
-            data-grid="categories"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: 20,
-            }}
-          >
-            {categories.map((category) => {
-              const IconComponent = iconMap[category.icon];
-              return (
-                <Link
-                  key={category.slug}
-                  href={`/categories/${category.slug}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div
-                    className="card category-card"
-                    style={{
-                      padding: 24,
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                    }}
+          {!categories ? (
+            <div style={{ textAlign: "center", padding: 40, color: "var(--text-muted)" }}>
+              Loading categories...
+            </div>
+          ) : (
+            <div
+              data-grid="categories"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(4, 1fr)",
+                gap: 20,
+              }}
+            >
+              {categories.map((category) => {
+                const IconComponent = iconMap[category.icon];
+                return (
+                  <Link
+                    key={category.slug}
+                    href={`/categories/${category.slug}`}
+                    style={{ textDecoration: "none" }}
                   >
                     <div
+                      className="card category-card"
                       style={{
-                        width: 48,
-                        height: 48,
-                        borderRadius: 10,
-                        background:
-                          "linear-gradient(135deg, var(--color-primary), var(--color-primary-light))",
+                        padding: 24,
+                        height: "100%",
                         display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        marginBottom: 16,
+                        flexDirection: "column",
                       }}
                     >
-                      {IconComponent && (
-                        <IconComponent size={24} color="#ffffff" />
-                      )}
-                    </div>
-                    <h3
-                      style={{
-                        fontSize: "1.05rem",
-                        fontWeight: 700,
-                        color: "var(--text)",
-                        marginBottom: 8,
-                      }}
-                    >
-                      {category.name}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "0.875rem",
-                        color: "var(--text-secondary)",
-                        lineHeight: 1.6,
-                        flex: 1,
-                        marginBottom: 12,
-                      }}
-                    >
-                      {category.description}
-                    </p>
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                      }}
-                    >
-                      <span
+                      <div
                         style={{
-                          fontSize: "0.8rem",
-                          color: "var(--text-muted)",
-                          fontWeight: 500,
+                          width: 48,
+                          height: 48,
+                          borderRadius: 10,
+                          background:
+                            "linear-gradient(135deg, var(--color-primary), var(--color-primary-light))",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          marginBottom: 16,
                         }}
                       >
-                        {category.businessCount} businesses
-                      </span>
-                      <ArrowRight
-                        size={16}
-                        style={{ color: "var(--color-primary)" }}
-                      />
+                        {IconComponent && (
+                          <IconComponent size={24} color="#ffffff" />
+                        )}
+                      </div>
+                      <h3
+                        style={{
+                          fontSize: "1.05rem",
+                          fontWeight: 700,
+                          color: "var(--text)",
+                          marginBottom: 8,
+                        }}
+                      >
+                        {category.name}
+                      </h3>
+                      <p
+                        style={{
+                          fontSize: "0.875rem",
+                          color: "var(--text-secondary)",
+                          lineHeight: 1.6,
+                          flex: 1,
+                          marginBottom: 12,
+                        }}
+                      >
+                        {category.description}
+                      </p>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "space-between",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "0.8rem",
+                            color: "var(--text-muted)",
+                            fontWeight: 500,
+                          }}
+                        >
+                          Browse listings
+                        </span>
+                        <ArrowRight
+                          size={16}
+                          style={{ color: "var(--color-primary)" }}
+                        />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
         </div>
       </section>
 
@@ -524,130 +553,138 @@ export default function Home() {
             </p>
           </div>
 
-          <div
-            data-grid="businesses"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: 24,
-            }}
-          >
-            {featuredBusinesses.map((business) => (
-              <div key={business.id} className="card" style={{ padding: 24 }}>
-                {/* Badges */}
-                <div
-                  style={{
-                    display: "flex",
-                    gap: 8,
-                    marginBottom: 12,
-                    flexWrap: "wrap",
-                  }}
-                >
-                  {business.verified && (
-                    <span className="verified-badge">
-                      <CheckCircle size={12} />
-                      Verified
-                    </span>
-                  )}
-                  {business.featured && (
-                    <span className="featured-badge">
-                      <Star size={12} />
-                      Featured
-                    </span>
-                  )}
-                </div>
-
-                {/* Name & Category */}
-                <h3
-                  style={{
-                    fontSize: "1.15rem",
-                    fontWeight: 700,
-                    color: "var(--text)",
-                    marginBottom: 4,
-                  }}
-                >
-                  {business.name}
-                </h3>
-                <p
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "var(--color-primary)",
-                    fontWeight: 600,
-                    marginBottom: 12,
-                  }}
-                >
-                  {business.category}
-                </p>
-
-                {/* Rating */}
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                    marginBottom: 12,
-                  }}
-                >
-                  <RatingStars rating={business.rating} />
-                  <span
+          {!featuredBusinesses ? (
+            <div style={{ textAlign: "center", padding: 40, color: "var(--text-muted)" }}>
+              Loading featured businesses...
+            </div>
+          ) : (
+            <div
+              data-grid="businesses"
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(3, 1fr)",
+                gap: 24,
+              }}
+            >
+              {featuredBusinesses.map((business) => (
+                <div key={business._id} className="card" style={{ padding: 24 }}>
+                  {/* Badges */}
+                  <div
                     style={{
-                      fontSize: "0.8rem",
-                      color: "var(--text-muted)",
+                      display: "flex",
+                      gap: 8,
+                      marginBottom: 12,
+                      flexWrap: "wrap",
                     }}
                   >
-                    ({business.reviewCount} reviews)
-                  </span>
-                </div>
+                    {business.verified && (
+                      <span className="verified-badge">
+                        <CheckCircle size={12} />
+                        Verified
+                      </span>
+                    )}
+                    {business.featured && (
+                      <span className="featured-badge">
+                        <Star size={12} />
+                        Featured
+                      </span>
+                    )}
+                  </div>
 
-                {/* Description */}
-                <p
-                  style={{
-                    fontSize: "0.875rem",
-                    color: "var(--text-secondary)",
-                    lineHeight: 1.6,
-                    marginBottom: 16,
-                  }}
-                >
-                  {business.description}
-                </p>
-
-                {/* Service Tags */}
-                <div
-                  style={{
-                    display: "flex",
-                    flexWrap: "wrap",
-                    gap: 6,
-                    marginBottom: 20,
-                  }}
-                >
-                  {business.services.slice(0, 3).map((service) => (
-                    <span key={service} className="service-tag">
-                      {service}
-                    </span>
-                  ))}
-                  {business.services.length > 3 && (
-                    <span className="service-tag">
-                      +{business.services.length - 3} more
-                    </span>
-                  )}
-                </div>
-
-                {/* CTA */}
-                <Link
-                  href={`/businesses/${business.slug}`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <button
-                    className="btn-primary"
-                    style={{ width: "100%", justifyContent: "center" }}
+                  {/* Name & Category */}
+                  <h3
+                    style={{
+                      fontSize: "1.15rem",
+                      fontWeight: 700,
+                      color: "var(--text)",
+                      marginBottom: 4,
+                    }}
                   >
-                    View Profile
-                    <ArrowRight size={16} />
-                  </button>
-                </Link>
-              </div>
-            ))}
-          </div>
+                    {business.name}
+                  </h3>
+                  <p
+                    style={{
+                      fontSize: "0.8rem",
+                      color: "var(--color-primary)",
+                      fontWeight: 600,
+                      marginBottom: 12,
+                    }}
+                  >
+                    {business.categoryName}
+                  </p>
+
+                  {/* Rating */}
+                  {business.rating && (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        marginBottom: 12,
+                      }}
+                    >
+                      <RatingStars rating={business.rating} />
+                      <span
+                        style={{
+                          fontSize: "0.8rem",
+                          color: "var(--text-muted)",
+                        }}
+                      >
+                        {business.reviewCount ? `(${business.reviewCount} reviews)` : ""}
+                      </span>
+                    </div>
+                  )}
+
+                  {/* Description */}
+                  <p
+                    style={{
+                      fontSize: "0.875rem",
+                      color: "var(--text-secondary)",
+                      lineHeight: 1.6,
+                      marginBottom: 16,
+                    }}
+                  >
+                    {business.description}
+                  </p>
+
+                  {/* Service Tags */}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      gap: 6,
+                      marginBottom: 20,
+                    }}
+                  >
+                    {business.services.slice(0, 3).map((service) => (
+                      <span key={service} className="service-tag">
+                        {service}
+                      </span>
+                    ))}
+                    {business.services.length > 3 && (
+                      <span className="service-tag">
+                        +{business.services.length - 3} more
+                      </span>
+                    )}
+                  </div>
+
+                  {/* CTA */}
+                  <Link
+                    href={`/businesses/${business.slug}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <button
+                      className="btn-primary"
+                      style={{ width: "100%", justifyContent: "center" }}
+                    >
+                      View Profile
+                      <ArrowRight size={16} />
+                    </button>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

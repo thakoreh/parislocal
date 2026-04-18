@@ -2,17 +2,12 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useQuery, useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 import {
-  CheckCircle,
-  Shield,
-  Phone,
-  Star,
-  MapPin,
-  ChevronRight,
-  Loader2,
-  AlertCircle,
+  CheckCircle, Shield, Phone, Star, MapPin,
+  ChevronRight, AlertCircle,
 } from "lucide-react";
-import { categories } from "@/data/categories";
 
 interface FormData {
   businessName: string;
@@ -25,21 +20,12 @@ interface FormData {
   address: string;
   city: string;
   website: string;
-  servingAreas: string;
 }
 
 const initialFormData: FormData = {
-  businessName: "",
-  ownerName: "",
-  email: "",
-  phone: "",
-  category: "",
-  description: "",
-  services: "",
-  address: "",
-  city: "",
-  website: "",
-  servingAreas: "",
+  businessName: "", ownerName: "", email: "", phone: "",
+  category: "", description: "", services: "", address: "",
+  city: "Paris", website: "",
 };
 
 export default function ListYourBusinessPage() {
@@ -48,11 +34,10 @@ export default function ListYourBusinessPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleChange = (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
+  const categories = useQuery(api.categories.list);
+  const createBusiness = useMutation(api.businesses.create);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -63,22 +48,40 @@ export default function ListYourBusinessPage() {
     setError(null);
 
     try {
-      const res = await fetch("/api/list-business", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        setError(data.error || "Something went wrong. Please try again.");
+      const cat = categories?.find((c: any) => c.slug === formData.category);
+      if (!cat) {
+        setError("Please select a valid category.");
+        setLoading(false);
         return;
       }
 
+      const slug = formData.businessName
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+
+      await createBusiness({
+        name: formData.businessName,
+        slug,
+        description: formData.description,
+        categorySlug: formData.category,
+        categoryName: cat.name,
+        services: formData.services.split(",").map((s) => s.trim()).filter(Boolean),
+        phone: formData.phone,
+        email: formData.email || undefined,
+        website: formData.website || undefined,
+        address: formData.address,
+        city: formData.city || "Paris",
+        province: "ON",
+        verified: false,
+        featured: false,
+        tags: formData.services.split(",").map((s) => s.trim().toLowerCase()).filter(Boolean),
+        source: "self-submitted",
+      });
+
       setSubmitted(true);
-    } catch {
-      setError("Network error. Please check your connection and try again.");
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -86,73 +89,17 @@ export default function ListYourBusinessPage() {
 
   if (submitted) {
     return (
-      <div
-        style={{
-          maxWidth: 600,
-          margin: "0 auto",
-          padding: "160px 24px 80px",
-          textAlign: "center",
-        }}
-      >
-        <div
-          style={{
-            width: 88,
-            height: 88,
-            borderRadius: "50%",
-            background: "linear-gradient(135deg, #10b981, #059669)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            margin: "0 auto 28px",
-          }}
-        >
+      <div style={{ maxWidth: 600, margin: "0 auto", padding: "160px 24px 80px", textAlign: "center" }}>
+        <div style={{ width: 88, height: 88, borderRadius: "50%", background: "linear-gradient(135deg, #10b981, #059669)", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 28px" }}>
           <CheckCircle size={44} color="#ffffff" />
         </div>
-        <h1
-          style={{
-            fontSize: "1.75rem",
-            fontWeight: 700,
-            color: "var(--text)",
-            marginBottom: 12,
-          }}
-        >
-          Thank you!
-        </h1>
-        <p
-          style={{
-            fontSize: "1.05rem",
-            color: "var(--text-secondary)",
-            lineHeight: 1.7,
-            marginBottom: 32,
-          }}
-        >
-          We will review your listing within 24 hours. Once approved, your
-          business will appear in our directory for local customers to find.
+        <h1 style={{ fontSize: "1.75rem", fontWeight: 700, color: "var(--text)", marginBottom: 12 }}>Thank you!</h1>
+        <p style={{ fontSize: "1.05rem", color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 32 }}>
+          We&apos;ll review your listing within 24 hours. Once approved, your business will appear in our directory for local customers to find.
         </p>
-        <div
-          style={{
-            display: "flex",
-            gap: 12,
-            justifyContent: "center",
-            flexWrap: "wrap",
-          }}
-        >
-          <Link
-            href="/"
-            className="btn-primary"
-            style={{ textDecoration: "none" }}
-          >
-            Back to Home
-          </Link>
-          <button
-            className="btn-secondary"
-            onClick={() => {
-              setSubmitted(false);
-              setFormData(initialFormData);
-            }}
-          >
-            Add Another Business
-          </button>
+        <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
+          <Link href="/" className="btn-primary" style={{ textDecoration: "none" }}>Back to Home</Link>
+          <button className="btn-secondary" onClick={() => { setSubmitted(false); setFormData(initialFormData); }}>Add Another Business</button>
         </div>
       </div>
     );
@@ -160,668 +107,99 @@ export default function ListYourBusinessPage() {
 
   return (
     <div>
-      {/* Hero */}
-      <section
-        className="hero-gradient"
-        style={{
-          padding: "120px 24px 56px",
-          position: "relative",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: 700,
-            margin: "0 auto",
-            textAlign: "center",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          <span
-            className="section-badge"
-            style={{
-              background: "rgba(245, 158, 11, 0.15)",
-              color: "#fbbf24",
-              marginBottom: 20,
-            }}
-          >
-            Free Listing
-          </span>
-          <h1
-            style={{
-              fontSize: "clamp(1.75rem, 4vw, 2.5rem)",
-              fontWeight: 800,
-              color: "#ffffff",
-              lineHeight: 1.2,
-              marginTop: 16,
-              marginBottom: 16,
-            }}
-          >
+      <section className="hero-gradient" style={{ padding: "120px 24px 56px", position: "relative" }}>
+        <div style={{ maxWidth: 700, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
+          <span className="section-badge" style={{ background: "rgba(245, 158, 11, 0.15)", color: "#fbbf24", marginBottom: 20 }}>Free Listing</span>
+          <h1 style={{ fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 800, color: "#ffffff", lineHeight: 1.2, marginTop: 16, marginBottom: 16 }}>
             Get Your Business Found by Local Customers
           </h1>
-          <p
-            style={{
-              fontSize: "1.05rem",
-              color: "rgba(255, 255, 255, 0.8)",
-              lineHeight: 1.7,
-              maxWidth: 560,
-              margin: "0 auto",
-            }}
-          >
-            Join hundreds of local businesses on ParisLocal. Create your free
-            listing and start connecting with customers in Paris, Brantford,
-            Cambridge, and surrounding areas.
+          <p style={{ fontSize: "1.05rem", color: "rgba(255, 255, 255, 0.8)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto" }}>
+            Join local businesses on ParisLocal. Create your free listing and start connecting with customers in Paris, Brantford, Cambridge, and surrounding areas.
           </p>
         </div>
       </section>
 
-      {/* Form + Benefits */}
       <section style={{ padding: "48px 24px 80px" }}>
-        <div
-          style={{
-            maxWidth: 1000,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "1fr 340px",
-            gap: 40,
-            alignItems: "start",
-          }}
-        >
-          {/* Form */}
+        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 340px", gap: 40, alignItems: "start" }}>
           <div className="card" style={{ padding: 32 }}>
-            <h2
-              style={{
-                fontSize: "1.25rem",
-                fontWeight: 700,
-                color: "var(--text)",
-                marginBottom: 24,
-              }}
-            >
-              Business Information
-            </h2>
-
+            <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text)", marginBottom: 24 }}>Business Information</h2>
             <form onSubmit={handleSubmit}>
-              {/* Error banner */}
               {error && (
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    padding: "0.75rem 1rem",
-                    marginBottom: "1.25rem",
-                    borderRadius: "0.5rem",
-                    background: "#fef2f2",
-                    border: "1px solid #fecaca",
-                    color: "#dc2626",
-                    fontSize: "0.875rem",
-                  }}
-                >
-                  <AlertCircle size={16} style={{ flexShrink: 0 }} />
-                  {error}
+                <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", padding: "0.75rem 1rem", marginBottom: "1.25rem", borderRadius: "0.5rem", background: "#fef2f2", border: "1px solid #fecaca", color: "#dc2626", fontSize: "0.875rem" }}>
+                  <AlertCircle size={16} style={{ flexShrink: 0 }} />{error}
                 </div>
               )}
-
-              <div
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: "1fr 1fr",
-                  gap: 16,
-                }}
-              >
-                {/* Business Name */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                 <div style={{ gridColumn: "1 / -1" }}>
-                  <label
-                    htmlFor="businessName"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Business Name
-                  </label>
-                  <input
-                    type="text"
-                    id="businessName"
-                    name="businessName"
-                    className="input-field"
-                    placeholder="e.g. Grand River Plumbing"
-                    value={formData.businessName}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="businessName" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Business Name</label>
+                  <input type="text" id="businessName" name="businessName" className="input-field" placeholder="e.g. Grand River Plumbing" value={formData.businessName} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* Owner Name */}
                 <div>
-                  <label
-                    htmlFor="ownerName"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Owner Name
-                  </label>
-                  <input
-                    type="text"
-                    id="ownerName"
-                    name="ownerName"
-                    className="input-field"
-                    placeholder="Your full name"
-                    value={formData.ownerName}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="ownerName" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Owner Name</label>
+                  <input type="text" id="ownerName" name="ownerName" className="input-field" placeholder="Your full name" value={formData.ownerName} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* Email */}
                 <div>
-                  <label
-                    htmlFor="email"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    className="input-field"
-                    placeholder="you@business.ca"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="email" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Email</label>
+                  <input type="email" id="email" name="email" className="input-field" placeholder="you@business.ca" value={formData.email} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* Phone */}
                 <div>
-                  <label
-                    htmlFor="phone"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    className="input-field"
-                    placeholder="(519) 555-0123"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="phone" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Phone</label>
+                  <input type="tel" id="phone" name="phone" className="input-field" placeholder="(519) 555-0123" value={formData.phone} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* Category */}
                 <div>
-                  <label
-                    htmlFor="category"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Category
-                  </label>
-                  <select
-                    id="category"
-                    name="category"
-                    className="input-field"
-                    value={formData.category}
-                    onChange={handleChange}
-                    required
-                    style={{ cursor: loading ? "not-allowed" : "pointer" }}
-                    disabled={loading}
-                  >
+                  <label htmlFor="category" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Category</label>
+                  <select id="category" name="category" className="input-field" value={formData.category} onChange={handleChange} required style={{ cursor: loading ? "not-allowed" : "pointer" }} disabled={loading}>
                     <option value="">Select a category</option>
-                    {categories.map((cat) => (
-                      <option key={cat.slug} value={cat.slug}>
-                        {cat.name}
-                      </option>
-                    ))}
+                    {categories?.map((cat: any) => (<option key={cat.slug} value={cat.slug}>{cat.name}</option>))}
                   </select>
                 </div>
-
-                {/* Description */}
                 <div style={{ gridColumn: "1 / -1" }}>
-                  <label
-                    htmlFor="description"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Description
-                  </label>
-                  <textarea
-                    id="description"
-                    name="description"
-                    className="input-field"
-                    placeholder="Tell customers about your business, experience, and what makes you stand out..."
-                    rows={4}
-                    value={formData.description}
-                    onChange={handleChange}
-                    required
-                    style={{ resize: "vertical" }}
-                    disabled={loading}
-                  />
+                  <label htmlFor="description" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Description</label>
+                  <textarea id="description" name="description" className="input-field" placeholder="Tell customers about your business..." rows={4} value={formData.description} onChange={handleChange} required style={{ resize: "vertical" }} disabled={loading} />
                 </div>
-
-                {/* Services */}
                 <div style={{ gridColumn: "1 / -1" }}>
-                  <label
-                    htmlFor="services"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Services (comma-separated)
-                  </label>
-                  <input
-                    type="text"
-                    id="services"
-                    name="services"
-                    className="input-field"
-                    placeholder="e.g. Emergency Repairs, Drain Cleaning, Water Heaters"
-                    value={formData.services}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="services" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Services (comma-separated)</label>
+                  <input type="text" id="services" name="services" className="input-field" placeholder="e.g. Emergency Repairs, Drain Cleaning, Water Heaters" value={formData.services} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* Address */}
                 <div>
-                  <label
-                    htmlFor="address"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Address
-                  </label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    className="input-field"
-                    placeholder="123 Main Street"
-                    value={formData.address}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="address" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Address</label>
+                  <input type="text" id="address" name="address" className="input-field" placeholder="123 Main Street" value={formData.address} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* City */}
                 <div>
-                  <label
-                    htmlFor="city"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    City
-                  </label>
-                  <input
-                    type="text"
-                    id="city"
-                    name="city"
-                    className="input-field"
-                    placeholder="Paris"
-                    value={formData.city}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                  <label htmlFor="city" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>City</label>
+                  <input type="text" id="city" name="city" className="input-field" placeholder="Paris" value={formData.city} onChange={handleChange} required disabled={loading} />
                 </div>
-
-                {/* Website */}
-                <div>
-                  <label
-                    htmlFor="website"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Website (optional)
-                  </label>
-                  <input
-                    type="url"
-                    id="website"
-                    name="website"
-                    className="input-field"
-                    placeholder="https://yourbusiness.ca"
-                    value={formData.website}
-                    onChange={handleChange}
-                    disabled={loading}
-                  />
-                </div>
-
-                {/* Serving Areas */}
-                <div>
-                  <label
-                    htmlFor="servingAreas"
-                    style={{
-                      display: "block",
-                      fontSize: "0.85rem",
-                      fontWeight: 600,
-                      color: "var(--text)",
-                      marginBottom: 6,
-                    }}
-                  >
-                    Serving Areas (comma-separated)
-                  </label>
-                  <input
-                    type="text"
-                    id="servingAreas"
-                    name="servingAreas"
-                    className="input-field"
-                    placeholder="e.g. Paris, Brantford, Cambridge"
-                    value={formData.servingAreas}
-                    onChange={handleChange}
-                    required
-                    disabled={loading}
-                  />
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <label htmlFor="website" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Website (optional)</label>
+                  <input type="url" id="website" name="website" className="input-field" placeholder="https://yourbusiness.ca" value={formData.website} onChange={handleChange} disabled={loading} />
                 </div>
               </div>
-
-              {/* Submit */}
-              <div
-                style={{
-                  marginTop: 28,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 16,
-                }}
-              >
-                <button
-                  type="submit"
-                  className="btn-primary"
-                  disabled={loading}
-                  style={{
-                    opacity: loading ? 0.7 : 1,
-                    cursor: loading ? "not-allowed" : "pointer",
-                  }}
-                >
-                  {loading ? (
-                    <>
-                      Submitting... <Loader2 size={16} className="animate-spin" />
-                    </>
-                  ) : (
-                    <>
-                      Submit Your Listing
-                      <ChevronRight size={16} />
-                    </>
-                  )}
-                </button>
-                <span
-                  style={{
-                    fontSize: "0.8rem",
-                    color: "var(--text-muted)",
-                  }}
-                >
-                  Free -- no payment required
-                </span>
-              </div>
+              <button type="submit" className="btn-primary" disabled={loading} style={{ width: "100%", marginTop: 24, justifyContent: "center", display: "flex", alignItems: "center", gap: 8, opacity: loading ? 0.7 : 1 }}>
+                {loading ? "Submitting..." : "Submit Listing"} {loading && <span className="animate-spin">...</span>}
+              </button>
             </form>
           </div>
 
-          {/* Benefits Sidebar */}
+          {/* Benefits sidebar */}
           <div>
-            <div
-              className="card"
-              style={{
-                padding: 28,
-                background:
-                  "linear-gradient(135deg, var(--color-primary), var(--color-primary-light))",
-                border: "none",
-                color: "#ffffff",
-                marginBottom: 24,
-              }}
-            >
-              <h3
-                style={{
-                  fontSize: "1.15rem",
-                  fontWeight: 700,
-                  marginBottom: 20,
-                }}
-              >
-                Why List Your Business?
-              </h3>
-
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: 18,
-                }}
-              >
-                <div style={{ display: "flex", gap: 12 }}>
-                  <div
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      background: "rgba(255, 255, 255, 0.15)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Star size={18} />
-                  </div>
-                  <div>
-                    <h4
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 600,
-                        marginBottom: 4,
-                      }}
-                    >
-                      Free Listing
-                    </h4>
-                    <p
-                      style={{
-                        fontSize: "0.8rem",
-                        lineHeight: 1.6,
-                        opacity: 0.85,
-                      }}
-                    >
-                      No fees, no hidden charges. Your business listing is
-                      completely free forever.
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: 12 }}>
-                  <div
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      background: "rgba(255, 255, 255, 0.15)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Shield size={18} />
-                  </div>
-                  <div>
-                    <h4
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 600,
-                        marginBottom: 4,
-                      }}
-                    >
-                      Verified Badge
-                    </h4>
-                    <p
-                      style={{
-                        fontSize: "0.8rem",
-                        lineHeight: 1.6,
-                        opacity: 0.85,
-                      }}
-                    >
-                      Earn trust with a verified badge that shows customers you
-                      are a legitimate, trusted business.
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: 12 }}>
-                  <div
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      background: "rgba(255, 255, 255, 0.15)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <Phone size={18} />
-                  </div>
-                  <div>
-                    <h4
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 600,
-                        marginBottom: 4,
-                      }}
-                    >
-                      Direct Customer Contact
-                    </h4>
-                    <p
-                      style={{
-                        fontSize: "0.8rem",
-                        lineHeight: 1.6,
-                        opacity: 0.85,
-                      }}
-                    >
-                      Customers contact you directly by phone or email. No
-                      middleman, no commissions.
-                    </p>
-                  </div>
-                </div>
-
-                <div style={{ display: "flex", gap: 12 }}>
-                  <div
-                    style={{
-                      width: 36,
-                      height: 36,
-                      borderRadius: 8,
-                      background: "rgba(255, 255, 255, 0.15)",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      flexShrink: 0,
-                    }}
-                  >
-                    <MapPin size={18} />
-                  </div>
-                  <div>
-                    <h4
-                      style={{
-                        fontSize: "0.95rem",
-                        fontWeight: 600,
-                        marginBottom: 4,
-                      }}
-                    >
-                      Local Visibility
-                    </h4>
-                    <p
-                      style={{
-                        fontSize: "0.8rem",
-                        lineHeight: 1.6,
-                        opacity: 0.85,
-                      }}
-                    >
-                      Be found by customers searching for services in your area.
-                      Reach Paris, Brantford, Cambridge, and beyond.
-                    </p>
-                  </div>
-                </div>
+            <div className="card" style={{ padding: 24 }}>
+              <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text)", marginBottom: 20 }}>Why list with us?</h3>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                {[
+                  { icon: CheckCircle, text: "100% free — no hidden fees or commissions" },
+                  { icon: Shield, text: "Verified badge builds trust with customers" },
+                  { icon: Phone, text: "Customers contact you directly" },
+                  { icon: MapPin, text: "Reach 15,000+ Paris area residents" },
+                ].map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={item.text} style={{ display: "flex", alignItems: "flex-start", gap: 10 }}>
+                      <Icon size={18} style={{ color: "var(--color-success)", flexShrink: 0, marginTop: 2 }} />
+                      <span style={{ fontSize: "0.875rem", color: "var(--text-secondary)", lineHeight: 1.5 }}>{item.text}</span>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-
-            <div
-              className="card"
-              style={{ padding: 20, textAlign: "center" }}
-            >
-              <p
-                style={{
-                  fontSize: "0.85rem",
-                  color: "var(--text-secondary)",
-                  lineHeight: 1.6,
-                }}
-              >
-                Have questions?{" "}
-                <Link
-                  href="/contact"
-                  style={{
-                    color: "var(--color-primary)",
-                    fontWeight: 600,
-                    textDecoration: "none",
-                  }}
-                >
-                  Contact us
-                </Link>{" "}
-                and we will be happy to help.
-              </p>
             </div>
           </div>
         </div>
