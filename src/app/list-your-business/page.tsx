@@ -114,7 +114,7 @@ export default function ListYourBusinessPage() {
             Get Your Business Found by Local Customers
           </h1>
           <p style={{ fontSize: "1.05rem", color: "rgba(255, 255, 255, 0.8)", lineHeight: 1.7, maxWidth: 560, margin: "0 auto" }}>
-            Join local businesses on ParisLocal. Create your free listing and start connecting with customers in Paris, Brantford, Cambridge, and surrounding areas.
+            Join local businesses on ParisLocal. Create your free listing and start connecting with customers in Paris and Brant County.
           </p>
         </div>
       </section>
@@ -189,7 +189,7 @@ export default function ListYourBusinessPage() {
                   { icon: CheckCircle, text: "100% free — no hidden fees or commissions" },
                   { icon: Shield, text: "Verified badge builds trust with customers" },
                   { icon: Phone, text: "Customers contact you directly" },
-                  { icon: MapPin, text: "Reach 15,000+ Paris area residents" },
+                  { icon: MapPin, text: "Reach local customers in Paris, Ontario" },
                 ].map((item) => {
                   const Icon = item.icon;
                   return (

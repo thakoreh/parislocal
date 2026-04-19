@@ -87,25 +87,6 @@ const businesses = [
   },
   // CAFES & BAKERY
   {
-    name: "Dog-Eared Cafe", slug: "dog-eared-cafe", description: "A second-hand bookstore combined with a cafe. Espresso drinks, baked goods, soups, and sandwiches.",
-    longDescription: "Dog-Eared Cafe is one of Paris's most unique spots — a second-hand bookstore and cafe all in one. Browse their curated selection of books while enjoying espresso drinks, house-made baked goods, hearty soups, and sandwiches. Located in the heart of downtown Paris.",
-    categorySlug: "cafes", categoryName: "Cafes & Bakery",
-    services: ["Coffee", "Espresso", "Baked Goods", "Soups", "Sandwiches", "Books"],
-    phone: "(519) 442-3444", address: "38 Grand River St N", city: "Paris", province: "ON",
-    verified: false, featured: false,
-    tags: ["cafe", "bookstore", "coffee", "espresso", "baked goods", "downtown"],
-    source: "community listing — not independently verified", lastVerified: "2026-04",
-  },
-  {
-    name: "Detour Cafe Paris", slug: "detour-cafe-paris", description: "Cozy cafe known for coffee and breakfast sandwiches. A community gathering spot.",
-    categorySlug: "cafes", categoryName: "Cafes & Bakery",
-    services: ["Coffee", "Breakfast", "Baked Goods"],
-    phone: "(519) 442-0722", city: "Paris", province: "ON",
-    verified: false, featured: false,
-    tags: ["cafe", "coffee", "breakfast", "community"],
-    source: "community listing — not independently verified", lastVerified: "2026-04",
-  },
-  {
     name: "Little Paris Bread Co.", slug: "little-paris-bread-co", description: "Small batch bakery specializing in sourdough bread and baked goods.",
     categorySlug: "cafes", categoryName: "Cafes & Bakery",
     services: ["Sourdough Bread", "Baked Goods", "Small Batch Baking"],

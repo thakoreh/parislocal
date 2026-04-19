@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "What areas does ParisLocal serve?",
     answer:
-      "ParisLocal covers Paris, Brantford, Cambridge, Burford, St. George, Scotland, Mt. Pleasant, Glen Morris, Ayr, New Dundee, Puslinch, and North Dumfries. If your business serves any of these areas, you can list it here.",
+      "ParisLocal focuses on Paris, Ontario and surrounding Brant County communities. If your business serves the Paris area, you can list it here.",
   },
   {
     question: "How do I leave a review for a business?",

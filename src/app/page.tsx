@@ -134,12 +134,7 @@ export default function Home() {
               value={searchLocation}
               onChange={(e) => setSearchLocation(e.target.value)}
             >
-              <option value="" disabled>Location</option>
-              <option value="Paris">Paris</option>
-              <option value="Brantford">Brantford</option>
-              <option value="Cambridge">Cambridge</option>
-              <option value="Burford">Burford</option>
-              <option value="St. George">St. George</option>
+              <option value="Paris" selected>Paris, ON</option>
             </select>
             <button className="btn-primary" style={{ borderRadius: 8 }} onClick={() => router.push(`/search?q=${encodeURIComponent(searchQuery)}&location=${encodeURIComponent(searchLocation)}`)}>
               Search
@@ -150,7 +145,7 @@ export default function Home() {
             {[
               { number: `${totalBusinesses}+`, label: "Businesses" },
               { number: "20", label: "Service Categories" },
-              { number: "12", label: "Service Areas" },
+              { number: "Paris, ON", label: "Focused" },
               { number: "100%", label: "Free to Use" },
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>

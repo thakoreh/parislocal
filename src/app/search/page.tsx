@@ -24,7 +24,7 @@ function RatingStars({ rating }: { rating: number }) {
   );
 }
 
-const servingAreas = ["Paris", "Brantford", "Cambridge", "Burford", "St. George", "Scotland", "Mt. Pleasant", "Glen Morris", "Ayr", "New Dundee", "Puslinch", "North Dumfries"];
+const servingAreas = ["Paris"];
 
 function SearchContent() {
   const searchParams = useSearchParams();
