@@ -14,7 +14,7 @@ const links = [
   { href: "/contact", label: "Contact" },
 ];
 
-const areas = ["Paris", "Brantford", "Cambridge", "Burford", "St. George", "Scotland", "Mt. Pleasant"];
+const areas = ["Paris, Ontario"];
 
 export default function Footer() {
   return (
