@@ -42,7 +42,7 @@ export default function CategoriesPage() {
           {!categories ? (
             <div style={{ textAlign: "center", padding: 40, color: "var(--text-muted)" }}>Loading categories...</div>
           ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 20 }}>
+            <div style={{ display: "grid", gap: 20 }} data-grid="categories">
               {categories.map((category) => {
                 const IconComponent = iconMap[category.icon];
                 return (

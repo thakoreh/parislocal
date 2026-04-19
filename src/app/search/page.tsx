@@ -103,7 +103,7 @@ function SearchContent() {
           </div>
 
           {results.length > 0 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}>
+            <div style={{ display: "grid", gap: 24 }} data-responsive="2col">
               {results.map((business) => (
                 <div key={business._id} className="card" style={{ padding: 24, display: "flex", flexDirection: "column" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 12 }}>

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Search, MapPin, Sun, Moon, Leaf } from "lucide-react";
+import { Menu, X, Search, MapPin } from "lucide-react";
 
 const navLinks = [
   { href: "/categories", label: "Categories" },
@@ -10,134 +10,122 @@ const navLinks = [
   { href: "/guides", label: "Guides" },
   { href: "/search", label: "Search", icon: Search },
   { href: "/emergency", label: "Emergency" },
-  { href: "/list-your-business", label: "List Your Business" },
+  { href: "/list-your-business", label: "List Your Business", highlight: true },
 ];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const html = document.documentElement;
-    setIsDark(html.classList.contains("dark"));
+    const onScroll = () => setScrolled(window.scrollY > 10);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const toggleTheme = () => {
-    const html = document.documentElement;
-    if (html.classList.contains("dark")) {
-      html.classList.remove("dark");
-      setIsDark(false);
-    } else {
-      html.classList.add("dark");
-      setIsDark(true);
-    }
-  };
-
-  const closeMobileMenu = () => setMobileMenuOpen(false);
+  useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
 
   return (
-    <nav className="glass-nav fixed top-0 left-0 right-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-1.5 text-xl font-bold"
-            style={{ color: "var(--text)", textDecoration: "none" }}
-          >
-            <Leaf size={20} style={{ color: "var(--color-primary)" }} />
-            <span style={{ fontFamily: "var(--font-heading)" }}>
-              Paris<span style={{ color: "var(--color-accent)" }}>.</span>Local
-            </span>
-          </Link>
+    <nav className="glass-nav" style={{
+      position: "fixed", top: 0, left: 0, right: 0, zIndex: 50,
+      borderBottom: scrolled ? "1px solid var(--border)" : "1px solid transparent",
+      transition: "border-color 0.3s ease",
+    }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 20px", display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
+        {/* Logo */}
+        <Link href="/" style={{ textDecoration: "none", display: "flex", alignItems: "center", gap: 8 }}>
+          <div style={{
+            width: 34, height: 34, borderRadius: 10,
+            background: "linear-gradient(135deg, var(--primary), var(--primary-light))",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <MapPin size={18} color="#fff" />
+          </div>
+          <span style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 800, color: "var(--text)" }}>
+            Paris<span style={{ color: "var(--primary)" }}>.</span>Local
+          </span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="desktop-nav items-center gap-1">
-            {navLinks.map((link) => (
+        {/* Desktop Nav */}
+        <div className="desktop-nav" style={{ alignItems: "center", gap: 2 }}>
+          {navLinks.map((link) => (
+            link.highlight ? (
+              <Link key={link.href} href={link.href} style={{ textDecoration: "none" }}>
+                <button className="btn-primary" style={{ fontSize: "0.8rem", padding: "7px 16px", borderRadius: 8 }}>
+                  {link.label}
+                </button>
+              </Link>
+            ) : (
               <Link
                 key={link.href}
                 href={link.href}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-                style={{ color: "var(--text-secondary)" }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = "var(--primary)";
-                  e.currentTarget.style.background = "var(--green-glow)";
+                style={{
+                  fontSize: "0.875rem", fontWeight: 500,
+                  color: "var(--text-secondary)", textDecoration: "none",
+                  padding: "8px 14px", borderRadius: 8,
+                  transition: "all 0.2s ease",
                 }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = "var(--text-secondary)";
-                  e.currentTarget.style.background = "transparent";
-                }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.background = "rgba(99, 102, 241, 0.06)"; }}
+                onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-secondary)"; e.currentTarget.style.background = "transparent"; }}
               >
-                {link.icon && <link.icon size={16} />}
                 {link.label}
               </Link>
-            ))}
-
-            {/* Dark mode toggle */}
-            <button
-              onClick={toggleTheme}
-              className="flex items-center justify-center w-9 h-9 rounded-lg transition-colors ml-1"
-              style={{ color: "var(--text-secondary)" }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.color = "var(--color-accent)";
-                e.currentTarget.style.background = "var(--accent-glow)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.color = "var(--text-secondary)";
-                e.currentTarget.style.background = "transparent";
-              }}
-              aria-label="Toggle dark mode"
-            >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          </div>
-
-          {/* Mobile Controls */}
-          <div className="mobile-hamburger items-center gap-2" style={{ display: "none" }}>
-            <button
-              onClick={toggleTheme}
-              className="flex items-center justify-center w-9 h-9 rounded-lg"
-              style={{ color: "var(--text-secondary)" }}
-              aria-label="Toggle dark mode"
-            >
-              {isDark ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="flex items-center justify-center w-9 h-9 rounded-lg"
-              style={{ color: "var(--text)" }}
-              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            >
-              {mobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-            </button>
-          </div>
+            )
+          ))}
         </div>
+
+        {/* Mobile Hamburger */}
+        <button
+          className="mobile-hamburger"
+          onClick={() => setMobileOpen(!mobileOpen)}
+          style={{
+            display: "none", alignItems: "center", justifyContent: "center",
+            width: 40, height: 40, borderRadius: 10,
+            border: "1px solid var(--border)", background: "var(--bg-white)",
+            cursor: "pointer", color: "var(--text)",
+          }}
+          aria-label="Toggle menu"
+        >
+          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div
-          className="animate-fade-in"
-          style={{
-            background: "var(--bg-card)",
-            borderTop: "1px solid var(--border)",
-          }}
-        >
-          <div className="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-1">
+      {/* Mobile Menu */}
+      {mobileOpen && (
+        <>
+          <div
+            onClick={() => setMobileOpen(false)}
+            style={{ position: "fixed", inset: 0, top: 64, background: "rgba(15, 23, 42, 0.4)", zIndex: 49, backdropFilter: "blur(4px)" }}
+          />
+          <div style={{
+            position: "fixed", top: 64, left: 0, right: 0,
+            background: "var(--bg-white)", borderBottom: "1px solid var(--border)",
+            zIndex: 50, padding: "12px 20px 20px",
+            animation: "fadeIn 0.2s ease",
+          }}>
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                onClick={closeMobileMenu}
-                className="flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors"
-                style={{ color: "var(--text-secondary)" }}
+                onClick={() => setMobileOpen(false)}
+                style={{
+                  display: "flex", alignItems: "center", gap: 10,
+                  padding: "14px 16px", borderRadius: 12,
+                  fontSize: "1rem", fontWeight: 500,
+                  color: link.highlight ? "var(--primary)" : "var(--text-secondary)",
+                  textDecoration: "none",
+                  transition: "all 0.15s ease",
+                  background: link.highlight ? "rgba(99, 102, 241, 0.06)" : "transparent",
+                }}
               >
-                {link.icon && <link.icon size={16} />}
                 {link.label}
               </Link>
             ))}
           </div>
-        </div>
+        </>
       )}
     </nav>
   );

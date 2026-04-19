@@ -117,7 +117,7 @@ export default function BusinessProfilePage() {
 
       {/* Two Column Layout */}
       <section style={{ padding: "48px 24px 60px" }}>
-        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 380px", gap: 32, alignItems: "start" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto", display: "grid", gap: 32, alignItems: "start" }} data-responsive="sidebar">
           {/* Left Column */}
           <div>
             {business.longDescription && (
@@ -242,7 +242,7 @@ export default function BusinessProfilePage() {
             <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "var(--text)", marginBottom: 24 }}>
               More {business.categoryName}
             </h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+            <div style={{ display: "grid", gap: 20 }} data-responsive="3col">
               {filtered.slice(0, 3).map((b) => (
                 <Link key={b._id} href={`/businesses/${b.slug}`} style={{ textDecoration: "none" }}>
                   <div className="card" style={{ padding: 20 }}>

@@ -64,7 +64,7 @@ export default function GuidesPage() {
                     </span>
                     <div style={{ flex: 1, height: 1, background: "var(--border)" }} />
                   </div>
-                  <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+                  <div style={{ display: "grid", gap: 20 }} data-responsive="2col">
                     {items.map((guide: any) => (
                       <Link key={guide._id} href={`/guides/${guide.slug}`} style={{ textDecoration: "none" }}>
                         <div className="card" style={{ padding: 24, height: "100%", display: "flex", flexDirection: "column" }}>

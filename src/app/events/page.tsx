@@ -47,7 +47,7 @@ export default function EventsPage() {
         <section style={{ padding: "48px 24px 24px" }}>
           <div style={{ maxWidth: 1200, margin: "0 auto" }}>
             <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "var(--text)", marginBottom: 24 }}>Featured Events</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}>
+            <div style={{ display: "grid", gap: 24 }} data-responsive="2col">
               {featured.map((event: any) => {
                 const colors = categoryColors[event.category] || categoryColors.community;
                 return (

@@ -19,18 +19,19 @@ export default function AboutPage() {
   return (
     <main>
       {/* Hero */}
-      <section className="hero-gradient">
-        <div className="container" style={{ textAlign: "center", padding: "4rem 1rem" }}>
+      <section className="hero-gradient" style={{ padding: "120px 24px 60px", position: "relative" }}>
+        <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
           <span className="section-badge">About Us</span>
-          <h1 style={{ marginTop: "1rem", fontSize: "2.5rem", lineHeight: 1.2 }}>
+          <h1 style={{ marginTop: 16, fontSize: "clamp(1.75rem, 4vw, 2.5rem)", fontWeight: 800, color: "#ffffff", lineHeight: 1.2 }}>
             Built for Paris, by Paris
           </h1>
           <p
             style={{
               maxWidth: "640px",
-              margin: "1rem auto 0",
-              color: "var(--text-secondary)",
-              fontSize: "1.125rem",
+              margin: "16px auto 0",
+              color: "rgba(255, 255, 255, 0.8)",
+              fontSize: "1.05rem",
+              lineHeight: 1.7,
             }}
           >
             A local business directory created by the people who live and work here.
@@ -41,8 +42,8 @@ export default function AboutPage() {
       <div className="section-divider" />
 
       {/* Our Story */}
-      <section style={{ padding: "4rem 1rem" }}>
-        <div className="container" style={{ maxWidth: "720px", margin: "0 auto" }}>
+      <section style={{ padding: "60px 24px" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <h2 style={{ fontSize: "1.75rem", marginBottom: "1rem" }}>
             Our Story
           </h2>
@@ -58,8 +59,8 @@ export default function AboutPage() {
       <div className="section-divider" />
 
       {/* Mission Cards */}
-      <section style={{ padding: "4rem 1rem" }}>
-        <div className="container">
+      <section style={{ padding: "60px 24px" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           <h2 style={{ textAlign: "center", fontSize: "1.75rem", marginBottom: "0.5rem" }}>
             Who We Serve
           </h2>
@@ -161,8 +162,8 @@ export default function AboutPage() {
       <div className="section-divider" />
 
       {/* Team / Values */}
-      <section style={{ padding: "4rem 1rem" }}>
-        <div className="container" style={{ maxWidth: "720px", margin: "0 auto", textAlign: "center" }}>
+      <section style={{ padding: "60px 24px" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto", textAlign: "center" }}>
           <div
             style={{
               width: 48,
@@ -193,8 +194,8 @@ export default function AboutPage() {
       <div className="section-divider" />
 
       {/* CTA */}
-      <section style={{ padding: "4rem 1rem" }}>
-        <div className="container" style={{ maxWidth: "720px", margin: "0 auto" }}>
+      <section style={{ padding: "60px 24px" }}>
+        <div style={{ maxWidth: "720px", margin: "0 auto" }}>
           <div
             className="card"
             style={{

@@ -1,241 +1,85 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Phone, Mail, Heart, Leaf } from "lucide-react";
+import { MapPin, Mail, Heart } from "lucide-react";
 
-const quickLinks = [
+const links = [
   { href: "/", label: "Home" },
-  { href: "/categories", label: "Browse Categories" },
-  { href: "/events", label: "Local Events" },
+  { href: "/categories", label: "Categories" },
+  { href: "/events", label: "Events" },
   { href: "/guides", label: "Guides" },
   { href: "/search", label: "Search" },
+  { href: "/emergency", label: "Emergency" },
   { href: "/list-your-business", label: "List Your Business" },
+  { href: "/contact", label: "Contact" },
 ];
 
-const serviceAreas = [
-  "Paris",
-  "Brantford",
-  "Cambridge",
-  "Burford",
-  "St. George",
-  "Scotland",
-  "Mt. Pleasant",
-  "Glen Morris",
-];
+const areas = ["Paris", "Brantford", "Cambridge", "Burford", "St. George", "Scotland", "Mt. Pleasant"];
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: "40px",
-          }}
-          className="footer-grid"
-        >
-          {/* Column 1: Branding */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <Link
-              href="/"
-              style={{ textDecoration: "none" }}
-            >
-              <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                <Leaf size={22} style={{ color: "#fbbf24" }} />
-                <span style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "1.5rem",
-                  fontWeight: 800,
-                  color: "#ffffff",
-                }}>
-                  Paris<span style={{ color: "#fbbf24" }}>.</span>Local
-                </span>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "56px 24px 32px" }}>
+        {/* Top grid */}
+        <div className="footer-grid" style={{ display: "grid", gap: 40, gridTemplateColumns: "1fr" }}>
+          {/* Brand */}
+          <div>
+            <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 14 }}>
+              <div style={{ width: 32, height: 32, borderRadius: 8, background: "linear-gradient(135deg, var(--primary), var(--primary-light))", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <MapPin size={16} color="#fff" />
+              </div>
+              <span style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 800, color: "#fff" }}>
+                Paris<span style={{ color: "#818cf8" }}>.</span>Local
               </span>
-            </Link>
-            <p
-              style={{
-                color: "rgba(250, 248, 244, 0.7)",
-                fontSize: "0.9rem",
-                lineHeight: "1.7",
-                maxWidth: "300px",
-              }}
-            >
-              Your community directory for Paris, Ontario. Connecting neighbours
-              with trusted local businesses since 2024.
+            </div>
+            <p style={{ color: "#94a3b8", fontSize: "0.875rem", lineHeight: 1.7, maxWidth: 280 }}>
+              Your community directory for Paris, Ontario. Connecting neighbours with trusted local businesses.
             </p>
-            <p style={{
-              color: "rgba(250, 248, 244, 0.5)",
-              fontSize: "0.8rem",
-              fontFamily: "var(--font-heading)",
-              fontStyle: "italic",
-            }}>
-              &ldquo;The Prettiest Town in Canada&rdquo;
-            </p>
-          </div>
-
-          {/* Column 2: Quick Links */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <h3
-              style={{
-                fontFamily: "var(--font-accent)",
-                fontSize: "0.8rem",
-                fontWeight: 700,
-                color: "#fbbf24",
-                margin: 0,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              Explore
-            </h3>
-            <nav style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-              {quickLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  style={{
-                    color: "rgba(250, 248, 244, 0.7)",
-                    fontSize: "0.9rem",
-                    textDecoration: "none",
-                    transition: "color 0.2s ease",
-                  }}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
-          </div>
-
-          {/* Column 3: Service Areas */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <h3
-              style={{
-                fontFamily: "var(--font-accent)",
-                fontSize: "0.8rem",
-                fontWeight: 700,
-                color: "#fbbf24",
-                margin: 0,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              Service Areas
-            </h3>
-            <div
-              style={{
-                display: "flex",
-                flexWrap: "wrap",
-                gap: "8px",
-              }}
-            >
-              {serviceAreas.map((area) => (
-                <span
-                  key={area}
-                  style={{
-                    color: "rgba(250, 248, 244, 0.6)",
-                    fontSize: "0.8rem",
-                    padding: "4px 12px",
-                    borderRadius: "6px",
-                    border: "1px solid rgba(250, 248, 244, 0.1)",
-                    background: "rgba(255, 255, 255, 0.05)",
-                  }}
-                >
-                  {area}
-                </span>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 16 }}>
+              {areas.map((a) => (
+                <span key={a} style={{ fontSize: "0.7rem", color: "#64748b", padding: "3px 10px", borderRadius: 6, border: "1px solid rgba(255,255,255,0.08)" }}>{a}</span>
               ))}
             </div>
           </div>
 
-          {/* Column 4: Contact */}
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-            <h3
-              style={{
-                fontFamily: "var(--font-accent)",
-                fontSize: "0.8rem",
-                fontWeight: 700,
-                color: "#fbbf24",
-                margin: 0,
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-              }}
-            >
-              Get in Touch
-            </h3>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              <a
-                href="mailto:hello@parislocal.ca"
-                style={{
-                  color: "rgba(250, 248, 244, 0.7)",
-                  fontSize: "0.9rem",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <Mail size={16} style={{ color: "#fbbf24", flexShrink: 0 }} />
-                hello@parislocal.ca
+          {/* Quick Links */}
+          <div>
+            <h4 style={{ fontSize: "0.75rem", fontWeight: 700, color: "#818cf8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Explore</h4>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }}>
+              {links.map((l) => (
+                <Link key={l.href} href={l.href} style={{ color: "#94a3b8", fontSize: "0.85rem", textDecoration: "none" }}>{l.label}</Link>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 style={{ fontSize: "0.75rem", fontWeight: 700, color: "#818cf8", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Contact</h4>
+            <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+              <a href="mailto:hello@parislocal.ca" style={{ display: "flex", alignItems: "center", gap: 8, color: "#94a3b8", fontSize: "0.85rem", textDecoration: "none" }}>
+                <Mail size={14} style={{ color: "#64748b" }} /> hello@parislocal.ca
               </a>
-              <a
-                href="/contact"
-                style={{
-                  color: "rgba(250, 248, 244, 0.7)",
-                  fontSize: "0.9rem",
-                  textDecoration: "none",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "10px",
-                }}
-              >
-                <MapPin size={16} style={{ color: "#fbbf24", flexShrink: 0 }} />
-                Paris, Ontario, Canada
-              </a>
+              <span style={{ display: "flex", alignItems: "center", gap: 8, color: "#94a3b8", fontSize: "0.85rem" }}>
+                <MapPin size={14} style={{ color: "#64748b" }} /> Paris, Ontario, Canada
+              </span>
             </div>
           </div>
         </div>
 
-        {/* Divider */}
-        <div
-          style={{
-            height: "1px",
-            background: "rgba(250, 248, 244, 0.1)",
-            margin: "40px 0 24px",
-          }}
-        />
-
-        {/* Copyright */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "6px",
-            color: "rgba(250, 248, 244, 0.5)",
-            fontSize: "0.8rem",
-          }}
-        >
-          <span>&copy; {new Date().getFullYear()} ParisLocal</span>
-          <span>·</span>
-          <span>Made with</span>
-          <Heart size={12} style={{ fill: "#fbbf24", color: "#fbbf24" }} />
-          <span>in Paris, Ontario</span>
+        {/* Bottom */}
+        <div style={{ borderTop: "1px solid rgba(255,255,255,0.08)", marginTop: 40, paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
+          <span style={{ color: "#475569", fontSize: "0.8rem" }}>
+            &copy; {new Date().getFullYear()} ParisLocal. All rights reserved.
+          </span>
+          <span style={{ color: "#475569", fontSize: "0.8rem", display: "flex", alignItems: "center", gap: 4 }}>
+            Made with <Heart size={12} style={{ color: "#818cf8" }} /> in Paris, ON
+          </span>
         </div>
       </div>
 
       <style>{`
-        .footer-grid {
-          grid-template-columns: 1fr;
-        }
         @media (min-width: 769px) {
-          .footer-grid {
-            grid-template-columns: 1.5fr 1fr 1fr 1fr;
-          }
-        }
-        @media (min-width: 769px) and (max-width: 1024px) {
-          .footer-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+          .footer-grid { grid-template-columns: 1.2fr 1fr 0.8fr; }
         }
       `}</style>
     </footer>

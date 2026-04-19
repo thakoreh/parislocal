@@ -129,7 +129,7 @@ export default function CategoryDetailPage() {
       <section style={{ padding: "60px 24px 80px" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto" }}>
           {businesses.length > 0 ? (
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 24 }}>
+            <div style={{ display: "grid", gap: 24 }} data-responsive="2col">
               {businesses.map((business) => (
                 <div key={business._id} className="card" style={{ padding: 24, display: "flex", flexDirection: "column" }}>
                   <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 12 }}>

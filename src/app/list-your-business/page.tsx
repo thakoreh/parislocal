@@ -120,7 +120,7 @@ export default function ListYourBusinessPage() {
       </section>
 
       <section style={{ padding: "48px 24px 80px" }}>
-        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gridTemplateColumns: "1fr 340px", gap: 40, alignItems: "start" }}>
+        <div style={{ maxWidth: 1000, margin: "0 auto", display: "grid", gap: 40, alignItems: "start" }} data-responsive="sidebar">
           <div className="card" style={{ padding: 32 }}>
             <h2 style={{ fontSize: "1.25rem", fontWeight: 700, color: "var(--text)", marginBottom: 24 }}>Business Information</h2>
             <form onSubmit={handleSubmit}>
@@ -129,7 +129,7 @@ export default function ListYourBusinessPage() {
                   <AlertCircle size={16} style={{ flexShrink: 0 }} />{error}
                 </div>
               )}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+              <div style={{ display: "grid", gap: 16 }} data-responsive="form-2col">
                 <div style={{ gridColumn: "1 / -1" }}>
                   <label htmlFor="businessName" style={{ display: "block", fontSize: "0.85rem", fontWeight: 600, color: "var(--text)", marginBottom: 6 }}>Business Name</label>
                   <input type="text" id="businessName" name="businessName" className="input-field" placeholder="e.g. Grand River Plumbing" value={formData.businessName} onChange={handleChange} required disabled={loading} />
