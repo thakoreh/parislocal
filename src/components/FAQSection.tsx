@@ -70,7 +70,7 @@ export default function FAQSection() {
           style={{
             background: "var(--bg-card)",
             border: "1px solid var(--border)",
-            borderRadius: 12,
+            borderRadius: 10,
             overflow: "hidden",
           }}
         >

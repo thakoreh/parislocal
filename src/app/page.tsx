@@ -51,21 +51,21 @@ export default function Home() {
         style={{
           padding: "140px 24px 100px",
           position: "relative",
-          textAlign: "center",
         }}
       >
         {/* Decorative glow */}
         <div style={{
-          position: "absolute", top: "-200px", left: "50%", transform: "translateX(-50%)",
+          position: "absolute", top: "-200px", left: "30%", transform: "translateX(-50%)",
           width: "800px", height: "500px", borderRadius: "50%",
-          background: "radial-gradient(ellipse, rgba(99, 102, 241, 0.15) 0%, transparent 70%)",
+          background: "radial-gradient(ellipse, rgba(61, 124, 107, 0.15) 0%, transparent 70%)",
           pointerEvents: "none",
         }} />
 
-        <div style={{ maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 3 }}>
+        <div style={{ maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 3, textAlign: "left" }}>
           <span className="section-badge" style={{
-            background: "rgba(99, 102, 241, 0.15)", color: "#a5b4fc",
-            border: "1px solid rgba(99, 102, 241, 0.2)",
+            background: "rgba(61, 124, 107, 0.15)",
+            color: "#8ec5b5",
+            border: "1px solid rgba(61, 124, 107, 0.2)",
           }}>
             <MapPin size={14} />
             Paris, Ontario &amp; Brant County
@@ -83,7 +83,7 @@ export default function Home() {
           }}>
             Find Trusted Local Services
             <br />
-            <span style={{ background: "linear-gradient(135deg, #818cf8, #fbbf24)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>
+            <span style={{ color: "#c67f3b" }}>
               In Your Neighbourhood
             </span>
           </h1>
@@ -93,7 +93,7 @@ export default function Home() {
             color: "rgba(255, 255, 255, 0.65)",
             lineHeight: 1.7,
             maxWidth: 540,
-            margin: "0 auto 36px",
+            marginBottom: 36,
           }}>
             Plumbers, electricians, restaurants, and 50+ more services — all verified, all local.
           </p>
@@ -184,7 +184,7 @@ export default function Home() {
                   <Link key={category.slug} href={`/categories/${category.slug}`} style={{ textDecoration: "none" }}>
                     <div className="card category-card" style={{ padding: "20px 20px 20px 20px", height: "100%" }}>
                       <div style={{
-                        width: 44, height: 44, borderRadius: 12,
+                        width: 44, height: 44, borderRadius: 10,
                         background: "linear-gradient(135deg, var(--primary), var(--primary-light))",
                         display: "flex", alignItems: "center", justifyContent: "center",
                         marginBottom: 14,
@@ -222,7 +222,7 @@ export default function Home() {
               const StepIcon = item.icon;
               return (
                 <div key={item.title} className="card" style={{ padding: 28, textAlign: "center" }}>
-                  <div style={{ width: 56, height: 56, borderRadius: 16, background: "linear-gradient(135deg, var(--primary), var(--primary-light))", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+                  <div style={{ width: 56, height: 56, borderRadius: 14, background: "linear-gradient(135deg, var(--primary), var(--primary-light))", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
                     <StepIcon size={26} color="#fff" />
                   </div>
                   <div style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--primary)", marginBottom: 8, textTransform: "uppercase", letterSpacing: "0.08em" }}>
@@ -301,7 +301,7 @@ export default function Home() {
               const FeatureIcon = feature.icon;
               return (
                 <div key={feature.title} className="card" style={{ padding: 28, textAlign: "center" }}>
-                  <div style={{ width: 48, height: 48, borderRadius: 12, background: "linear-gradient(135deg, var(--primary), var(--primary-light))", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
+                  <div style={{ width: 48, height: 48, borderRadius: 10, background: "linear-gradient(135deg, var(--primary), var(--primary-light))", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 16px" }}>
                     <FeatureIcon size={24} color="#fff" />
                   </div>
                   <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--text)", marginBottom: 8 }}>{feature.title}</h3>

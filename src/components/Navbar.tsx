@@ -68,7 +68,7 @@ export default function Navbar() {
                   padding: "8px 14px", borderRadius: 8,
                   transition: "all 0.2s ease",
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.background = "rgba(99, 102, 241, 0.06)"; }}
+                onMouseEnter={(e) => { e.currentTarget.style.color = "var(--primary)"; e.currentTarget.style.background = "rgba(61, 124, 107, 0.06)"; }}
                 onMouseLeave={(e) => { e.currentTarget.style.color = "var(--text-secondary)"; e.currentTarget.style.background = "transparent"; }}
               >
                 {link.label}
@@ -98,7 +98,7 @@ export default function Navbar() {
         <>
           <div
             onClick={() => setMobileOpen(false)}
-            style={{ position: "fixed", inset: 0, top: 64, background: "rgba(15, 23, 42, 0.4)", zIndex: 49, backdropFilter: "blur(4px)" }}
+            style={{ position: "fixed", inset: 0, top: 64, background: "rgba(28, 28, 26, 0.4)", zIndex: 49, backdropFilter: "blur(4px)" }}
           />
           <div style={{
             position: "fixed", top: 64, left: 0, right: 0,
@@ -118,7 +118,7 @@ export default function Navbar() {
                   color: link.highlight ? "var(--primary)" : "var(--text-secondary)",
                   textDecoration: "none",
                   transition: "all 0.15s ease",
-                  background: link.highlight ? "rgba(99, 102, 241, 0.06)" : "transparent",
+                  background: link.highlight ? "rgba(61, 124, 107, 0.06)" : "transparent",
                 }}
               >
                 {link.label}

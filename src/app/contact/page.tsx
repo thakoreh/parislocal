@@ -44,10 +44,10 @@ export default function ContactPage() {
 
   return (
     <main>
-      <section className="hero-gradient">
+      <section className="hero-gradient" style={{ paddingTop: "120px" }}>
         <div className="container" style={{ textAlign: "center", padding: "4rem 1rem" }}>
-          <h1 style={{ fontSize: "2.5rem", lineHeight: 1.2 }}>Get in Touch</h1>
-          <p style={{ maxWidth: "520px", margin: "1rem auto 0", color: "var(--text-secondary)", fontSize: "1.125rem" }}>
+          <h1 style={{ fontSize: "2.5rem", lineHeight: 1.2, fontWeight: 800, color: "#ffffff" }}>Get in Touch</h1>
+          <p style={{ maxWidth: "520px", margin: "1rem auto 0", color: "rgba(255,255,255,0.8)", fontSize: "1.125rem" }}>
             Have a question, suggestion, or want to list your business? We&apos;d love to hear from you.
           </p>
         </div>
