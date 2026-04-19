@@ -149,9 +149,9 @@ export default function Home() {
           <div style={{ display: "flex", justifyContent: "center", gap: 32, flexWrap: "wrap", marginTop: 48 }}>
             {[
               { number: `${totalBusinesses}+`, label: "Businesses" },
-              { number: "5,000+", label: "Customers" },
+              { number: "20", label: "Service Categories" },
               { number: "12", label: "Service Areas" },
-              { number: "4.7", label: "Avg Rating" },
+              { number: "100%", label: "Free to Use" },
             ].map((stat) => (
               <div key={stat.label} style={{ textAlign: "center" }}>
                 <div className="stat-number" style={{ fontSize: "1.5rem", fontWeight: 800 }}>{stat.number}</div>
@@ -216,7 +216,7 @@ export default function Home() {
           <div data-grid="features" style={{ display: "grid", gap: 24 }}>
             {[
               { icon: Search, title: "Search", desc: "Find the service you need by category or keyword" },
-              { icon: Users, title: "Compare", desc: "Check ratings, reviews, and verified credentials" },
+              { icon: Users, title: "Compare", desc: "Check services, hours, and verified contact info" },
               { icon: Phone, title: "Connect", desc: "Call or message businesses directly" },
             ].map((item, i) => {
               const StepIcon = item.icon;
@@ -296,7 +296,7 @@ export default function Home() {
             {[
               { icon: Shield, title: "Verified", desc: "Every business is checked for licenses, insurance, and local presence." },
               { icon: Phone, title: "No Middleman", desc: "Connect directly with business owners. No fees, no commissions." },
-              { icon: CheckCircle, title: "Community First", desc: "Built by locals, for locals. Real reviews from real neighbours." },
+              { icon: CheckCircle, title: "Community First", desc: "Built by locals, for locals. Supporting local businesses since day one." },
             ].map((feature) => {
               const FeatureIcon = feature.icon;
               return (

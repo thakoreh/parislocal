@@ -24,8 +24,9 @@ const categories = [
   { name: "Pet Services", slug: "pet-services", description: "Veterinary clinics and pet care", icon: "PawPrint", order: 19, featured: false },
 ];
 
-// All businesses verified from public sources (Yelp, TripAdvisor, Yellow Pages, Facebook, company websites)
+// Businesses sourced from YellowPages.ca, company websites, and community listings.
 // Only Paris, Ontario businesses. No Brantford or Cambridge exclusives.
+// Listings marked verified=false could not be independently confirmed.
 const businesses = [
   // RESTAURANTS
   {
@@ -39,23 +40,23 @@ const businesses = [
     source: "tripadvisor.ca — rated #1 restaurant in Paris ON", lastVerified: "2026-04",
   },
   {
-    name: "Juniper Dining Co.", slug: "juniper-dining-co", description: "Upscale casual dining in the heart of downtown Paris. Farm-to-table cuisine with locally sourced ingredients.",
+    name: "Juniper Dining", slug: "juniper-dining-co", description: "Upscale casual dining in the heart of downtown Paris. Farm-to-table cuisine with locally sourced ingredients.",
     categorySlug: "restaurants", categoryName: "Restaurants & Dining",
     services: ["Lunch", "Dinner", "Wine Bar", "Farm-to-Table", "Private Events"],
-    phone: "(519) 442-3522", address: "30 Grand River St N", city: "Paris", province: "ON",
+    phone: "(519) 442-3522", address: "3 Elm St", city: "Paris", province: "ON",
     verified: true, featured: true,
     tags: ["upscale", "farm-to-table", "wine", "downtown", "locally-sourced"],
-    source: "bitesalong.com — ranked #2 in Paris ON", lastVerified: "2026-04",
+    source: "juniperdiningco.ca — verified Paris ON restaurant", lastVerified: "2026-04",
   },
   {
-    name: "Cobblestone Public House", slug: "cobblestone-public-house", description: "Traditional pub atmosphere in a heritage cobblestone building. Craft beer, comfort food, and live music.",
-    longDescription: "Set inside one of Paris's historic cobblestone buildings, the Cobblestone Public House offers a warm pub experience with craft beers on tap, classic pub fare, and regular live music nights. The heritage setting makes it a unique dining spot you won't find anywhere else.",
+    name: "Cobblestone Pub", slug: "cobblestone-public-house", description: "Traditional pub atmosphere in a heritage cobblestone building. Craft beer, comfort food, and live music.",
+    longDescription: "Set inside one of Paris's historic cobblestone buildings, the Cobblestone Pub offers a warm pub experience with craft beers on tap, classic pub fare, and regular live music nights. The heritage setting makes it a unique dining spot you won't find anywhere else.",
     categorySlug: "restaurants", categoryName: "Restaurants & Dining",
     services: ["Lunch", "Dinner", "Craft Beer", "Live Music", "Pub Fare", "Patio"],
-    phone: "(519) 442-2337", address: "14 Grand River St N", city: "Paris", province: "ON",
+    phone: "(519) 442-2337", address: "111 Grand River St N", city: "Paris", province: "ON", postalCode: "N3L 2M4",
     verified: true, featured: true,
     tags: ["pub", "craft beer", "heritage building", "live music", "cobblestone"],
-    source: "tripadvisor.ca — listed in top Paris restaurants", lastVerified: "2026-04",
+    source: "yellowpages.ca — verified address and phone", lastVerified: "2026-04",
   },
   {
     name: "Mario's Pizza", slug: "marios-pizza", description: "Local pizza shop on Dundas Street. Takeout and delivery with a no-frills approach.",
@@ -64,16 +65,16 @@ const businesses = [
     phone: "(519) 442-3030", address: "Dundas St", city: "Paris", province: "ON",
     verified: true, featured: false,
     tags: ["pizza", "takeout", "delivery", "casual"],
-    source: "bitesalong.com — listed with phone number", lastVerified: "2026-04",
+    source: "yellowpages.ca — listed in Paris ON", lastVerified: "2026-04",
   },
   {
     name: "Stillwaters Plate and Pour", slug: "stillwaters-plate-and-pour", description: "Dining and drinks in Paris, Ontario. Locally owned restaurant and bar.",
     categorySlug: "restaurants", categoryName: "Restaurants & Dining",
     services: ["Lunch", "Dinner", "Drinks", "Casual Dining"],
-    phone: "(519) 440-0066", city: "Paris", province: "ON",
+    phone: "(519) 440-0066", address: "61 Grand River St N", city: "Paris", province: "ON",
     verified: true, featured: false,
     tags: ["restaurant", "bar", "casual dining"],
-    source: "yelp.ca — listed in Paris ON restaurants", lastVerified: "2026-04",
+    source: "yellowpages.ca — verified address and phone", lastVerified: "2026-04",
   },
   {
     name: "Yaari Adda", slug: "yaari-adda", description: "Restaurant serving flavorful Indian cuisine in Paris, Ontario.",
@@ -82,37 +83,36 @@ const businesses = [
     city: "Paris", province: "ON",
     verified: true, featured: false,
     tags: ["indian", "restaurant", "takeout", "dining"],
-    source: "bitesalong.com — ranked #5 in Paris ON", lastVerified: "2026-04",
+    source: "yellowpages.ca — listed in Paris ON", lastVerified: "2026-04",
   },
   // CAFES & BAKERY
   {
-    name: "Dog-Eared Café", slug: "dog-eared-cafe", description: "A beloved Paris institution combining a second-hand bookstore with a café. Espresso drinks, baked goods, soups, sandwiches, craft beer, and VQA wines.",
-    longDescription: "Dog-Eared Café is one of Paris's most unique spots — a second-hand bookstore and café all in one. Browse their curated selection of books while enjoying perfectly crafted espresso drinks, house-made baked goods, hearty soups, and sandwiches. They also serve craft beer and VQA wines. Located in the heart of downtown Paris.",
+    name: "Dog-Eared Cafe", slug: "dog-eared-cafe", description: "A second-hand bookstore combined with a cafe. Espresso drinks, baked goods, soups, and sandwiches.",
+    longDescription: "Dog-Eared Cafe is one of Paris's most unique spots — a second-hand bookstore and cafe all in one. Browse their curated selection of books while enjoying espresso drinks, house-made baked goods, hearty soups, and sandwiches. Located in the heart of downtown Paris.",
     categorySlug: "cafes", categoryName: "Cafes & Bakery",
-    services: ["Coffee", "Espresso", "Baked Goods", "Soups", "Sandwiches", "Craft Beer", "Wine", "Books"],
-    phone: "(519) 442-3444", website: "https://dogearedcafe.ca", address: "38 Grand River St N", city: "Paris", province: "ON",
-    verified: true, featured: true,
+    services: ["Coffee", "Espresso", "Baked Goods", "Soups", "Sandwiches", "Books"],
+    phone: "(519) 442-3444", address: "38 Grand River St N", city: "Paris", province: "ON",
+    verified: false, featured: false,
     tags: ["cafe", "bookstore", "coffee", "espresso", "baked goods", "downtown"],
-    source: "tripadvisor.ca — top rated Paris cafe + company website", lastVerified: "2026-04",
+    source: "community listing — not independently verified", lastVerified: "2026-04",
   },
   {
-    name: "Detour Cafe Paris", slug: "detour-cafe-paris", description: "Cozy cafe known for coffee, vegan options, and breakfast sandwiches. A community gathering spot.",
-    longDescription: "Detour Cafe Paris is one of the first proper cafe-breakfast-community-hub spots in Paris. It's popular with coffee enthusiasts, vegan diners, and breakfast sandwich lovers. The cozy atmosphere makes it a favourite spot for locals to meet, work, or relax.",
+    name: "Detour Cafe Paris", slug: "detour-cafe-paris", description: "Cozy cafe known for coffee and breakfast sandwiches. A community gathering spot.",
     categorySlug: "cafes", categoryName: "Cafes & Bakery",
-    services: ["Coffee", "Breakfast", "Vegan Options", "Lunch", "Baked Goods"],
-    phone: "(519) 442-0722", website: "https://detourcafeparis.ca", city: "Paris", province: "ON",
-    verified: true, featured: true,
-    tags: ["cafe", "coffee", "breakfast", "vegan", "community"],
-    source: "bitesalong.com — reviewed with phone number and website", lastVerified: "2026-04",
+    services: ["Coffee", "Breakfast", "Baked Goods"],
+    phone: "(519) 442-0722", city: "Paris", province: "ON",
+    verified: false, featured: false,
+    tags: ["cafe", "coffee", "breakfast", "community"],
+    source: "community listing — not independently verified", lastVerified: "2026-04",
   },
   {
-    name: "Little Paris Bread Co.", slug: "little-paris-bread-co", description: "Small batch bakery specializing in sourdough bread and baked goods. 5,200+ followers on Facebook.",
+    name: "Little Paris Bread Co.", slug: "little-paris-bread-co", description: "Small batch bakery specializing in sourdough bread and baked goods.",
     categorySlug: "cafes", categoryName: "Cafes & Bakery",
     services: ["Sourdough Bread", "Baked Goods", "Small Batch Baking"],
-    city: "Paris", province: "ON",
+    address: "32 Dundas St W", city: "Paris", province: "ON",
     verified: true, featured: true,
     tags: ["bakery", "sourdough", "bread", "small batch", "local"],
-    source: "facebook.com/littleparisbreadco — 5,211 likes, verified page", lastVerified: "2026-04",
+    source: "yellowpages.ca — verified Paris ON bakery", lastVerified: "2026-04",
   },
   // PLUMBING
   {
@@ -289,12 +289,12 @@ const businesses = [
   },
   // PAINTING
   {
-    name: "The English Paint Co.", slug: "english-paint-co", description: "Paris-based painting and refinishing company. Fully insured, serving Paris and surrounding areas. 650+ followers on Facebook.",
+    name: "The English Paint Co.", slug: "english-paint-co", description: "Paris-based painting and refinishing company. Fully insured, serving Paris and surrounding areas.",
     categorySlug: "painting", categoryName: "Painting",
     services: ["Interior Painting", "Exterior Painting", "Refinishing"],
     city: "Paris", province: "ON", verified: true, featured: true,
     tags: ["painting", "refinishing", "interior", "exterior", "insured"],
-    source: "facebook.com — verified business page, 654 likes", lastVerified: "2026-04",
+    source: "facebook.com — verified business page", lastVerified: "2026-04",
   },
   {
     name: "Precision Painting", slug: "precision-painting", description: "Residential interior and exterior painting in Paris, Ontario. Single-room updates to complete home transformations.",
@@ -434,13 +434,13 @@ const businesses = [
   },
   // DENTAL
   {
-    name: "Paris Dental Centre", slug: "paris-dental-centre", description: "Full-service dental clinic with 1,144+ reviews. General dentistry, orthodontics, and cosmetic dentistry.",
+    name: "Paris Dental Centre", slug: "paris-dental-centre", description: "Full-service dental clinic. General dentistry, orthodontics, and cosmetic dentistry.",
     categorySlug: "dental", categoryName: "Dental",
     services: ["General Dentistry", "Orthodontics", "Cosmetic Dentistry", "Teeth Whitening"],
     address: "120 Grand River St N", city: "Paris", province: "ON", postalCode: "N3L 2M5",
     phone: "(519) 442-4452", verified: true, featured: true,
     tags: ["dentist", "dental clinic", "orthodontics", "cosmetic"],
-    source: "birdeye.com — 1,144 reviews, yelp — 5.0 rating, verified address and phone", lastVerified: "2026-04",
+    source: "yellowpages.ca — verified address and phone", lastVerified: "2026-04",
   },
   {
     name: "Louvre Dental Centre", slug: "louvre-dental-centre", description: "Comprehensive dental care services for the whole family. Latest technology for quality care.",
@@ -784,16 +784,7 @@ Despite its small size, Paris has a surprisingly vibrant food scene. Here are th
 
 ### Cafes & Bakeries
 
-**Dog-Eared Café** (38 Grand River St N)
-- Bookstore + café — browse while you sip
-- Espresso, baked goods, soups, sandwiches, craft beer, VQA wines
-- A true Paris institution
-
-**Detour Cafe Paris**
-- Cozy community hub with coffee, vegan options, and breakfast sandwiches
-- Popular with the morning crowd
-
-**Little Paris Bread Co.**
+**Little Paris Bread Co.** (32 Dundas St W)
 - Small batch sourdough and artisan baked goods
 - Follow on Facebook for weekly specials
 
@@ -814,7 +805,6 @@ Despite its small size, Paris has a surprisingly vibrant food scene. Here are th
 
 ### Tips
 - Most restaurants are along Grand River Street North
-- Dog-Eared Café is the most popular spot — arrive early on weekends
 - Little Paris Bread sells out — pre-order on Facebook`,
     category: "dining" as const,
     published: true,
@@ -847,6 +837,77 @@ export const seedContent = mutation({
 
     return {
       message: "Content seeded successfully",
+      events: events.length,
+      guides: guides.length,
+    };
+  },
+});
+
+// Clear all data and re-seed
+export const reseed = mutation({
+  args: {},
+  handler: async (ctx) => {
+    // Clear all tables
+    const tables = ["businesses", "categories", "events", "guides"] as const;
+    let totalDeleted = 0;
+    for (const table of tables) {
+      const docs = await ctx.db.query(table).collect();
+      for (const doc of docs) {
+        await ctx.db.delete(doc._id);
+        totalDeleted++;
+      }
+    }
+
+    // Re-seed categories
+    for (const cat of categories) {
+      await ctx.db.insert("categories", cat);
+    }
+
+    // Re-seed businesses
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    for (const biz of businesses) {
+      await ctx.db.insert("businesses", {
+        name: biz.name,
+        slug: biz.slug,
+        description: biz.description,
+        longDescription: (biz as any).longDescription,
+        categorySlug: biz.categorySlug,
+        categoryName: biz.categoryName,
+        services: biz.services,
+        phone: (biz as any).phone ?? "",
+        email: (biz as any).email,
+        website: (biz as any).website,
+        address: (biz as any).address ?? "",
+        city: biz.city,
+        province: biz.province,
+        postalCode: (biz as any).postalCode,
+        lat: (biz as any).lat,
+        lng: (biz as any).lng,
+        verified: biz.verified,
+        featured: biz.featured,
+        emergency247: (biz as any).emergency247,
+        hours: (biz as any).hours,
+        tags: biz.tags,
+        source: biz.source,
+        lastVerified: biz.lastVerified,
+      });
+    }
+
+    // Re-seed events
+    for (const event of events) {
+      await ctx.db.insert("events", event);
+    }
+
+    // Re-seed guides
+    for (const guide of guides) {
+      await ctx.db.insert("guides", guide);
+    }
+
+    return {
+      message: "Reseeded successfully",
+      deleted: totalDeleted,
+      categories: categories.length,
+      businesses: businesses.length,
       events: events.length,
       guides: guides.length,
     };

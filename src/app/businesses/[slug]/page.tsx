@@ -98,18 +98,27 @@ export default function BusinessProfilePage() {
                 </div>
               </div>
 
-              <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12, fontSize: "0.9rem", color: "rgba(255, 255, 255, 0.7)" }}>
-                <MapPin size={16} />
-                {business.address}, {business.city}, {business.province}
-                {business.postalCode ? ` ${business.postalCode}` : ""}
-              </div>
+              {(business.address || business.city) && (
+                <div style={{ display: "flex", alignItems: "center", gap: 6, marginTop: 12, fontSize: "0.9rem", color: "rgba(255, 255, 255, 0.7)" }}>
+                  <MapPin size={16} />
+                  {business.address && `${business.address}, `}{business.city}{business.province ? `, ${business.province}` : ""}
+                  {business.postalCode ? ` ${business.postalCode}` : ""}
+                </div>
+              )}
             </div>
 
             <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
-              <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} className="btn-accent" style={{ textDecoration: "none" }}>
-                <Phone size={16} />
-                Call Now
-              </a>
+              {business.phone ? (
+                <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} className="btn-accent" style={{ textDecoration: "none" }}>
+                  <Phone size={16} />
+                  Call Now
+                </a>
+              ) : (
+                <Link href="/list-your-business" className="btn-accent" style={{ textDecoration: "none" }}>
+                  <Mail size={16} />
+                  Contact
+                </Link>
+              )}
             </div>
           </div>
         </div>
@@ -156,9 +165,11 @@ export default function BusinessProfilePage() {
                 Reach out directly to {business.name} for a free quote or to schedule a service.
               </p>
               <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
-                <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} className="btn-accent" style={{ textDecoration: "none" }}>
-                  <Phone size={16} />{business.phone}
-                </a>
+                {business.phone && (
+                  <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} className="btn-accent" style={{ textDecoration: "none" }}>
+                    <Phone size={16} />{business.phone}
+                  </a>
+                )}
                 {business.email && (
                   <a href={`mailto:${business.email}`} style={{ background: "rgba(255, 255, 255, 0.15)", color: "#ffffff", padding: "10px 24px", borderRadius: 8, fontWeight: 600, display: "inline-flex", alignItems: "center", gap: 8, border: "1px solid rgba(255, 255, 255, 0.25)", textDecoration: "none" }}>
                     <Mail size={16} />Send Email
@@ -178,13 +189,15 @@ export default function BusinessProfilePage() {
             <div className="card" style={{ padding: 24, marginBottom: 24 }}>
               <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text)", marginBottom: 16 }}>Contact Information</h3>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-                  <Phone size={18} style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: 2 }} />
-                  <div>
-                    <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: 2 }}>Phone</div>
-                    <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} style={{ color: "var(--text)", fontWeight: 500, textDecoration: "none" }}>{business.phone}</a>
+                {business.phone && (
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                    <Phone size={18} style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: 2 }} />
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: 2 }}>Phone</div>
+                      <a href={`tel:${business.phone.replace(/[^0-9+]/g, "")}`} style={{ color: "var(--text)", fontWeight: 500, textDecoration: "none" }}>{business.phone}</a>
+                    </div>
                   </div>
-                </div>
+                )}
                 {business.email && (
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                     <Mail size={18} style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: 2 }} />
@@ -194,13 +207,15 @@ export default function BusinessProfilePage() {
                     </div>
                   </div>
                 )}
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-                  <MapPin size={18} style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: 2 }} />
-                  <div>
-                    <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: 2 }}>Address</div>
-                    <span style={{ color: "var(--text)", fontWeight: 500 }}>{business.address}, {business.city}, {business.province}</span>
+                {business.address && (
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                    <MapPin size={18} style={{ color: "var(--color-primary)", flexShrink: 0, marginTop: 2 }} />
+                    <div>
+                      <div style={{ fontSize: "0.8rem", color: "var(--text-muted)", marginBottom: 2 }}>Address</div>
+                      <span style={{ color: "var(--text)", fontWeight: 500 }}>{business.address}, {business.city}, {business.province}</span>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
 
