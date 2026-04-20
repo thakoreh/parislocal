@@ -41,7 +41,7 @@ export default function Home() {
   const router = useRouter();
 
   const allBusinesses = useQuery(api.businesses.list, {}) as ConvexBusiness[] | undefined;
-  const totalBusinesses = allBusinesses?.length ?? 200;
+  const totalBusinesses = allBusinesses?.length ?? 52;
 
   return (
     <div>

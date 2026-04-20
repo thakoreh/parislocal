@@ -30,7 +30,7 @@ const categories = [
 const businesses = [
   // RESTAURANTS
   {
-    name: "Paris Inn", slug: "paris-inn", description: "Classic Paris restaurant with a scenic view of the Grand River. A local favourite for over 40 years.",
+    name: "Paris Inn", slug: "paris-inn", description: "Classic Paris restaurant with a scenic view of the Grand River.",
     longDescription: "The Paris Inn has been a cornerstone of Paris dining for decades, offering classic Canadian cuisine with stunning views of the Grand River. Located on Grand River Street North, it's a go-to spot for locals and visitors alike. Known for hearty portions, friendly service, and one of the best patios in Paris.",
     categorySlug: "restaurants", categoryName: "Restaurants & Dining",
     services: ["Lunch", "Dinner", "Patio Dining", "Takeout", "Catering"],
@@ -97,7 +97,7 @@ const businesses = [
   },
   // PLUMBING
   {
-    name: "Chasles Plumbing Professionals", slug: "chasles-plumbing", description: "Serving the Paris community for more than 24 years. Experienced plumbers for residential and commercial work.",
+    name: "Chasles Plumbing Professionals", slug: "chasles-plumbing", description: "Experienced plumbers for residential and commercial work in the Paris area.",
     categorySlug: "plumbing", categoryName: "Plumbing",
     services: ["Residential Plumbing", "Commercial Plumbing", "Repairs", "Installation", "Emergency Service"],
     city: "Paris", province: "ON", verified: true, featured: true, emergency247: true,
@@ -105,7 +105,7 @@ const businesses = [
     source: "chaslesplumbing.com — company website, 24+ years serving Paris", lastVerified: "2026-04",
   },
   {
-    name: "Backwoods Plumbing", slug: "backwoods-plumbing", description: "Local plumber Tom Jackman serving Paris and surrounding area. Highly recommended by locals.",
+    name: "Backwoods Plumbing", slug: "backwoods-plumbing", description: "Local plumber Tom Jackman serving Paris and the surrounding area.",
     categorySlug: "plumbing", categoryName: "Plumbing",
     services: ["Residential Plumbing", "Repairs", "Installation"],
     phone: "(519) 802-5832", city: "Paris", province: "ON",
@@ -252,7 +252,7 @@ const businesses = [
     source: "armourshieldroofing.com — company website listing Paris ON", lastVerified: "2026-04",
   },
   {
-    name: "Coop's Roofs", slug: "coops-roofs", description: "Local roofing company in Paris, Ontario. Serving the community for years.",
+    name: "Coop's Roofs", slug: "coops-roofs", description: "Local roofing company in Paris, Ontario.",
     categorySlug: "roofing", categoryName: "Roofing",
     services: ["Roofing", "Roof Repair", "Roof Installation"],
     address: "76 Capron St", city: "Paris", province: "ON", postalCode: "N3L 2K7",
