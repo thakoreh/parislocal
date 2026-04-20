@@ -45,12 +45,59 @@ export default function Home() {
 
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Is it free to list my business on ParisLocal?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes! Basic listings are completely free. You can add your business name, contact info, services, and serving areas at no cost. Premium featured listings are available for businesses that want additional visibility."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How are businesses verified?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "We verify businesses by confirming their business license, insurance, and physical location in or near Paris, Ontario. Verified businesses display a green checkmark badge on their profile."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What areas does ParisLocal serve?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ParisLocal focuses on Paris, Ontario and surrounding Brant County communities. If your business serves the Paris area, you can list it here."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How do I leave a review for a business?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Simply visit the business profile page and click the Write a Review button. All reviews are moderated to ensure they are genuine and helpful."
+                }
+              }
+            ]
+          })
+        }}
+      />
       {/* ===== HERO ===== */}
       <section
         className="hero-gradient"
         style={{
           padding: "140px 24px 100px",
           position: "relative",
+          backgroundImage: 'url(/images/hero-paris-river.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
         }}
       >
         {/* Decorative glow */}
@@ -59,6 +106,15 @@ export default function Home() {
           width: "800px", height: "500px", borderRadius: "50%",
           background: "radial-gradient(ellipse, rgba(61, 124, 107, 0.15) 0%, transparent 70%)",
           pointerEvents: "none",
+          zIndex: 2,
+        }} />
+
+        {/* Dark overlay for readability */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(135deg, rgba(26,46,38,0.88) 0%, rgba(44,76,62,0.72) 100%)",
+          zIndex: 1,
         }} />
 
         <div style={{ maxWidth: 720, margin: "0 auto", position: "relative", zIndex: 3, textAlign: "left" }}>
@@ -304,6 +360,49 @@ export default function Home() {
                 </div>
               );
             })}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PARIS, ONTARIO ===== */}
+      <section style={{ padding: "72px 24px", background: "var(--bg)" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <span style={{ display: "inline-block", padding: "4px 12px", borderRadius: "var(--radius-pill)", background: "rgba(61,124,107,0.1)", color: "var(--primary)", border: "1px solid rgba(61,124,107,0.2)", fontSize: "0.75rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.05em" }}>About Paris, Ontario</span>
+            <h2 style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.5rem, 3vw, 2rem)", fontWeight: 700, color: "var(--text)", marginTop: 12 }}>
+              The Prettiest Little Town in Canada
+            </h2>
+            <p style={{ color: "var(--text-muted)", marginTop: 8, maxWidth: 560, margin: "8px auto 0", lineHeight: 1.7 }}>
+              Paris, Ontario is home to 14,956 people. Known for its cobblestone architecture, scenic Grand River waterfront, and walkable historic downtown.
+            </p>
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+            <div style={{ background: "var(--bg-card)", borderRadius: "var(--radius)", overflow: "hidden", boxShadow: "var(--shadow-sm)", border: "1px solid var(--border)" }}>
+              <img src="/images/grand-river-trail.jpg" alt="Grand River in Paris, Ontario" style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }} />
+              <div style={{ padding: 20 }}>
+                <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: 6 }}>Grand River Waterfront</h3>
+                <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>The Grand River flows through the heart of Paris, offering scenic riverside walks and one of the best patios in Brant County.</p>
+              </div>
+            </div>
+            <div style={{ background: "var(--bg-card)", borderRadius: "var(--radius)", overflow: "hidden", boxShadow: "var(--shadow-sm)", border: "1px solid var(--border)" }}>
+              <img src="/images/cobblestone-street.jpg" alt="Historic cobblestone buildings in Paris, Ontario" style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }} />
+              <div style={{ padding: 20 }}>
+                <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: 6 }}>Cobblestone Capital of Canada</h3>
+                <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.6 }}>Paris has 12+ historic cobblestone buildings — a heritage found nowhere else in Canada in such concentration.</p>
+              </div>
+            </div>
+            <div style={{ background: "var(--bg-card)", borderRadius: "var(--radius)", overflow: "hidden", boxShadow: "var(--shadow-sm)", border: "1px solid var(--border)" }}>
+              <img src="/images/downtown-main.jpg" alt="Historic downtown Paris, Ontario" style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }} />
+              <div style={{ padding: 20 }}>
+                <h3 style={{ fontSize: "1rem", fontWeight: 700, marginBottom: 6 }}>Walkable Historic Downtown</h3>
+                <p style={{ fontSize: "0px", color: "var(--text-secondary)", lineHeight: 1.6 }}>Independent shops, locally-owned restaurants, and antique stores line the compact downtown core — built around the Grand River.</p>
+              </div>
+            </div>
+          </div>
+          <div style={{ textAlign: "center", marginTop: 40 }}>
+            <Link href="/about" style={{ textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 8, padding: "10px 20px", borderRadius: "var(--radius)", background: "var(--primary)", color: "#fff", fontWeight: 600, fontSize: "0.9rem" }}>
+              Learn More About Paris <ArrowRight size={16} />
+            </Link>
           </div>
         </div>
       </section>

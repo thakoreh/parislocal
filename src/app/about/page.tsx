@@ -39,6 +39,32 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <section style={{
+        background: "linear-gradient(135deg, #1a2e26 0%, #2c4c3e 100%)",
+        padding: "48px 24px",
+      }}>
+        <div style={{
+          maxWidth: 900, margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(150px, 1fr))",
+          gap: 32,
+          textAlign: "center",
+        }}>
+          {[
+            { number: "14,956", label: "Population (2021)" },
+            { number: "1856", label: "Town Incorporation" },
+            { number: "12+", label: "Cobblestone Buildings" },
+            { number: "1793", label: "Gypsum Discovered" },
+            { number: "1999", label: "Joined County of Brant" },
+          ].map((fact) => (
+            <div key={fact.label}>
+              <div style={{ fontSize: "1.75rem", fontWeight: 800, color: "#fff", marginBottom: 4 }}>{fact.number}</div>
+              <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.6)", textTransform: "uppercase", letterSpacing: "0.05em" }}>{fact.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <div className="section-divider" />
 
       {/* Our Story */}
@@ -48,10 +74,7 @@ export default function AboutPage() {
             Our Story
           </h2>
           <p style={{ color: "var(--text-secondary)", lineHeight: 1.75 }}>
-            ParisLocal was created to solve a simple problem &mdash; finding
-            trusted local services in small-town Ontario shouldn&rsquo;t
-            require scrolling through Toronto-based directories or relying on
-            Facebook posts from 2019.
+            ParisLocal was built for a simple reason: Paris, Ontario deserves a local resource that actually understands this community. We&apos;re a town of 14,956 people on the Grand River, called the &ldquo;Cobblestone Capital of Canada&rdquo; and the &ldquo;Prettiest Little Town in Canada&rdquo; by Harrowsmith Magazine. Our name comes from the gypsum deposits discovered here in 1793 &mdash; the same gypsum used to make Plaster of Paris. We built this directory because finding trusted local services in small-town Ontario shouldn&apos;t mean scrolling through Toronto-based directories or relying on Facebook posts from 2019. Every listing is verified. Every business is local. Every recommendation comes from people who know these streets.
           </p>
         </div>
       </section>
