@@ -2,15 +2,7 @@
 
 import { useQuery } from "convex/react";
 
-export const metadata = {
-  title: "Local Events in Paris, Ontario — ParisLocal",
-  description: "Find upcoming events and community activities in Paris, Ontario and Brant County.",
-  openGraph: {
-    title: "Local Events — ParisLocal",
-    description: "Find upcoming events in Paris, Ontario.",
-    images: ["/og-image.svg"],
-  },
-};
+;
 import { api } from "../../../convex/_generated/api";
 import Link from "next/link";
 import {

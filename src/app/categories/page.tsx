@@ -2,15 +2,7 @@
 
 import { useQuery } from "convex/react";
 
-export const metadata = {
-  title: "Browse Service Categories — ParisLocal",
-  description: "Browse all local service categories in Paris, Ontario and Brant County. From restaurants to plumbers, find every type of local business.",
-  openGraph: {
-    title: "Service Categories — ParisLocal",
-    description: "Browse all local service categories in Paris, Ontario.",
-    images: ["/og-image.svg"],
-  },
-};
+;
 import { api } from "../../../convex/_generated/api";
 import Link from "next/link";
 import {

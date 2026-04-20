@@ -2,15 +2,7 @@
 
 import { useState } from "react";
 
-export const metadata = {
-  title: "List Your Business — ParisLocal (Free)",
-  description: "List your Paris, Ontario business for free on ParisLocal. Reach thousands of local customers looking for your services.",
-  openGraph: {
-    title: "List Your Business — ParisLocal",
-    description: "Free business listings for Paris, Ontario businesses.",
-    images: ["/og-image.svg"],
-  },
-};
+;
 import Link from "next/link";
 import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";

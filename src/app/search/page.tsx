@@ -2,15 +2,7 @@
 
 import { useState, useEffect, useMemo, Suspense } from "react";
 
-export const metadata = {
-  title: "Search Local Businesses — ParisLocal",
-  description: "Search for local businesses in Paris, Ontario. Find verified plumbers, restaurants, electricians, and more.",
-  openGraph: {
-    title: "Search — ParisLocal",
-    description: "Search for local businesses in Paris, Ontario.",
-    images: ["/og-image.svg"],
-  },
-};
+;
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useSearchParams } from "next/navigation";

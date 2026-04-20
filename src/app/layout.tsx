@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
 
 export const metadata: Metadata = {
+  metadataBase: "https://parislocal.ca",
   title: "ParisLocal — Find Trusted Local Services in Paris, Ontario",
   description:
     "Connect with verified local businesses in Paris, Ontario. Plumbers, electricians, landscapers, restaurants, and more. Trusted contact info for Paris and Brant County.",
