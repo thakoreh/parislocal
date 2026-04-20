@@ -47,50 +47,10 @@ export default function GuideDetailClient(props: GuideDetailClientProps) {
     // Strip leading indentation from template literals (e.g. "    <h2>" → "<h2>")
     const cleaned = content.replace(/^\n/, "").replace(/(\n)[ \t]+</g, "$1<");
 
-    // Detect HTML format: content starts with block-level HTML tag after trimming
+    // Detect HTML format: content starts with a block-level HTML tag after trimming
     if (/^\s*<(h[1-6]|p|ul|ol|li|blockquote|div)/.test(cleaned)) {
-      // Render HTML blocks with proper styling wrapper
-      const blockStyle = { fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 8 };
-      const h2Style = { fontSize: "1.5rem", fontWeight: 700, color: "var(--text)", marginTop: 40, marginBottom: 16, lineHeight: 1.3 };
-      const h3Style = { fontSize: "1.15rem", fontWeight: 700, color: "var(--text)", marginTop: 28, marginBottom: 12, lineHeight: 1.4 };
-      const pStyle = { fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.8, marginBottom: 16 };
-      const liStyle = { fontSize: "0.95rem", color: "var(--text-secondary)", lineHeight: 1.7, marginBottom: 8, marginLeft: 20 };
-
-      // Split into blocks: handle each top-level tag
-      const blockRegex = /<\/?(h[1-6]|p|ul|ol|li|blockquote|div|strong|em|a|br)(?:\s[^>]*)?>[\s\S]*?(?=<\/?(?:h[1-6]|p|ul|ol|li|blockquote|div|strong|em|a|br)(?:\s[^>]*)?>|$)/g;
-      const blocks = cleaned.match(blockRegex) || [cleaned];
-
-      return blocks.map((block: string, i: number) => {
-        const trimmed = block.trim();
-        if (!trimmed) return null;
-        if (trimmed.startsWith("<h2")) {
-          const inner = trimmed.replace(/<h2[^>]*>([\s\S]*)<\/h2>/i, "$1").trim();
-          return <h2 key={i} style={h2Style}>{inner}</h2>;
-        }
-        if (trimmed.startsWith("<h3")) {
-          const inner = trimmed.replace(/<h3[^>]*>([\s\S]*)<\/h3>/i, "$1").trim();
-          return <h3 key={i} style={h3Style}>{inner}</h3>;
-        }
-        if (trimmed.startsWith("<p")) {
-          const inner = trimmed.replace(/<p[^>]*>([\s\S]*)<\/p>/i, "$1").trim();
-          return <p key={i} style={pStyle}>{inner}</p>;
-        }
-        if (trimmed.startsWith("<li")) {
-          return <li key={i} style={liStyle} dangerouslySetInnerHTML={{ __html: trimmed.replace(/<\/?li[^>]*>/gi, "") }} />;
-        }
-        if (trimmed.startsWith("<ul") || trimmed.startsWith("<ol")) {
-          return <ul key={i} style={{ ...liStyle, marginLeft: 0 }} dangerouslySetInnerHTML={{ __html: trimmed }} />;
-        }
-        if (trimmed.startsWith("<blockquote")) {
-          const inner = trimmed.replace(/<blockquote[^>]*>([\s\S]*)<\/blockquote>/i, "$1").trim();
-          return <blockquote key={i} style={{ borderLeft: "4px solid var(--color-primary)", paddingLeft: 16, margin: "24px 0", color: "var(--text-secondary)", fontStyle: "italic" }} dangerouslySetInnerHTML={{ __html: inner }} />;
-        }
-        if (/<(strong|b)>/i.test(trimmed)) {
-          return <p key={i} style={pStyle} dangerouslySetInnerHTML={{ __html: trimmed }} />;
-        }
-        // Fallback: render as paragraph
-        return <p key={i} style={pStyle}>{trimmed}</p>;
-      });
+      // Use dangerouslySetInnerHTML for HTML content — content is self-seeded, no XSS risk
+      return <div className="guide-content" dangerouslySetInnerHTML={{ __html: cleaned }} />;
     }
 
     // Markdown format (legacy)
