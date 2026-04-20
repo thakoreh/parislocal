@@ -1,6 +1,16 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+
+export const metadata = {
+  title: "Contact ParisLocal",
+  description: "Get in touch with ParisLocal. Questions about listing your business, corrections, or general inquiries about Paris, Ontario.",
+  openGraph: {
+    title: "Contact — ParisLocal",
+    description: "Get in touch with ParisLocal.",
+    images: ["/og-image.svg"],
+  },
+};
 import { useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import {

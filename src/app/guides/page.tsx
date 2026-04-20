@@ -1,6 +1,16 @@
 "use client";
 
 import { useQuery } from "convex/react";
+
+export const metadata = {
+  title: "Local Guides for Paris, Ontario — ParisLocal",
+  description: "Local guides for Paris, Ontario — new resident guides, seasonal tips, dining guides, and outdoor trails in Paris and Brant County.",
+  openGraph: {
+    title: "Local Guides — ParisLocal",
+    description: "Local guides for living and exploring Paris, Ontario.",
+    images: ["/og-image.svg"],
+  },
+};
 import { api } from "../../../convex/_generated/api";
 import Link from "next/link";
 import { useParams } from "next/navigation";

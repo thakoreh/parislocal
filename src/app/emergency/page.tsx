@@ -1,6 +1,16 @@
 "use client";
 
 import { useQuery } from "convex/react";
+
+export const metadata = {
+  title: "Emergency Services in Paris, Ontario — ParisLocal",
+  description: "Find emergency plumbers, electricians, and urgent services in Paris, Ontario. 24/7 emergency contacts.",
+  openGraph: {
+    title: "Emergency Services — ParisLocal",
+    description: "24/7 emergency local services in Paris, Ontario.",
+    images: ["/og-image.svg"],
+  },
+};
 import { api } from "../../../convex/_generated/api";
 import {
   Phone, MapPin, Clock, AlertTriangle, Shield, Heart,

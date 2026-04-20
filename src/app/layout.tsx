@@ -21,10 +21,24 @@ export const metadata: Metadata = {
   openGraph: {
     title: "ParisLocal — Find Trusted Local Services in Paris, Ontario",
     description:
-      "Connect with verified local businesses in Paris, Ontario.",
+      "Connect with verified local businesses in Paris, Ontario. Plumbers, electricians, landscapers, restaurants, and more.",
     type: "website",
     locale: "en_CA",
     url: "https://parislocal.ca",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "ParisLocal — Local Business Directory for Paris, Ontario",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ParisLocal — Find Trusted Local Services in Paris, Ontario",
+    description: "Connect with verified local businesses in Paris, Ontario.",
+    images: ["/og-image.svg"],
   },
 };
 
