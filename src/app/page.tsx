@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import FAQSection from "@/components/FAQSection";
+import BusinessCard from "@/components/BusinessCard";
 import type { ConvexBusiness, ConvexCategory } from "@/types/convex";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>> = {
@@ -305,32 +306,7 @@ export default function Home() {
           ) : (
             <div data-grid="businesses" style={{ display: "grid", gap: 20 }}>
               {featuredBusinesses.map((business) => (
-                <div key={business._id} className="card" style={{ padding: 24 }}>
-                  <div style={{ display: "flex", gap: 6, marginBottom: 12, flexWrap: "wrap" }}>
-                    {business.verified && <span className="verified-badge"><CheckCircle size={12} />Verified</span>}
-                    {business.featured && <span className="featured-badge"><Star size={12} />Featured</span>}
-                  </div>
-                  <h3 style={{ fontSize: "1.05rem", fontWeight: 700, color: "var(--text)", marginBottom: 4 }}>{business.name}</h3>
-                  <p style={{ fontSize: "0.75rem", color: "var(--primary)", fontWeight: 600, marginBottom: 12 }}>{business.categoryName}</p>
-                  {business.rating && (
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12 }}>
-                      <RatingStars rating={business.rating} />
-                      <span style={{ fontSize: "0.8rem", color: "var(--text-muted)" }}>{business.reviewCount ? `(${business.reviewCount})` : ""}</span>
-                    </div>
-                  )}
-                  <p style={{ fontSize: "0.85rem", color: "var(--text-secondary)", lineHeight: 1.6, marginBottom: 16 }}>{business.description}</p>
-                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 18 }}>
-                    {business.services.slice(0, 3).map((service) => (
-                      <span key={service} className="service-tag">{service}</span>
-                    ))}
-                    {business.services.length > 3 && <span className="service-tag">+{business.services.length - 3}</span>}
-                  </div>
-                  <Link href={`/businesses/${business.slug}`} style={{ textDecoration: "none" }}>
-                    <button className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
-                      View Profile <ArrowRight size={16} />
-                    </button>
-                  </Link>
-                </div>
+                <BusinessCard key={business._id} business={business} />
               ))}
             </div>
           )}

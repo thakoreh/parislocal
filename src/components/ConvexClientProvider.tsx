@@ -1,10 +1,17 @@
 "use client";
 
 import { ConvexProvider, ConvexReactClient } from "convex/react";
-import { ReactNode } from "react";
-
-const convex = new ConvexReactClient(process.env.NEXT_PUBLIC_CONVEX_URL as string);
+import { ReactNode, useMemo } from "react";
 
 export default function ConvexClientProvider({ children }: { children: ReactNode }) {
-  return <ConvexProvider client={convex}>{children}</ConvexProvider>;
+  const client = useMemo(() => {
+    const url = process.env.NEXT_PUBLIC_CONVEX_URL;
+    if (!url) {
+      // Return a dummy during build/SSG — pages using useQuery will just return undefined
+      return new ConvexReactClient("https://placeholder.convex.cloud");
+    }
+    return new ConvexReactClient(url);
+  }, []);
+
+  return <ConvexProvider client={client}>{children}</ConvexProvider>;
 }

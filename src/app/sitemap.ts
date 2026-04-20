@@ -1,9 +1,10 @@
 import { MetadataRoute } from "next";
 
 const BASE_URL = "https://parislocal.ca";
-const CONVEX_URL = process.env.NEXT_PUBLIC_CONVEX_URL;
+const CONVEX_URL = process.env.NEXT_PUBLIC_CONVEX_URL || "";
 
 async function convexQuery(path: string, args: Record<string, unknown> = {}) {
+  if (!CONVEX_URL) return [];
   const url = `${CONVEX_URL}/api/query`;
   const res = await fetch(url, {
     method: "POST",
