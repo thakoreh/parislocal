@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { api } from "../../../../convex/_generated/api";
 import { fetchQuery } from "convex/nextjs";
 import GuideDetailClient from "./GuideDetailClient";
-import { Script } from "next/script";
+import Script from "next/script";
 
 interface Props {
   params: Promise<{ slug: string }>;

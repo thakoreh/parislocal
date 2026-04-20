@@ -17,9 +17,10 @@ async function convexQuery(path: string, args: Record<string, unknown> = {}) {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [businesses, categories] = await Promise.all([
+  const [businesses, categories, guides] = await Promise.all([
     convexQuery("businesses:list", {}),
     convexQuery("categories:list", {}),
+    convexQuery("guides:list", {}),
   ]);
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -47,5 +48,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: biz.featured ? 0.9 : 0.7,
   }));
 
-  return [...staticPages, ...categoryPages, ...businessPages];
+  const guidePages: MetadataRoute.Sitemap = (guides as any[]).map((guide: any) => ({
+    url: `${BASE_URL}/guides/${guide.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...guidePages, ...categoryPages, ...businessPages];
 }
