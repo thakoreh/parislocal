@@ -101,8 +101,8 @@ const businesses = [
     categorySlug: "plumbing", categoryName: "Plumbing",
     services: ["Residential Plumbing", "Commercial Plumbing", "Repairs", "Installation", "Emergency Service"],
     city: "Paris", province: "ON", verified: true, featured: true, emergency247: true,
-    tags: ["plumber", "residential", "commercial", "emergency", "24 years experience"],
-    source: "chaslesplumbing.com — company website, 24+ years serving Paris", lastVerified: "2026-04",
+    tags: ["plumber", "residential", "commercial", "emergency", "24/7"],
+    source: "chaslesplumbing.com — company website, verified Paris ON address", lastVerified: "2026-04",
   },
   {
     name: "Backwoods Plumbing", slug: "backwoods-plumbing", description: "Local plumber Tom Jackman serving Paris and the surrounding area.",
@@ -124,7 +124,7 @@ const businesses = [
   },
   // ELECTRICAL
   {
-    name: "Ferguson Electrical Solutions", slug: "ferguson-electrical", description: "Top-quality electrical services in Paris, Ontario for over 6 years. Installation, maintenance, and repair.",
+    name: "Ferguson Electrical Solutions", slug: "ferguson-electrical", description: "Licensed electrical contracting for residential and commercial projects in Paris, Ontario.",
     categorySlug: "electrical", categoryName: "Electrical",
     services: ["Installation", "Maintenance", "Repair", "Residential", "Commercial"],
     phone: "(519) 400-9825", city: "Paris", province: "ON",
@@ -151,7 +151,7 @@ const businesses = [
     source: "parisheatingandcooling.com — company website serving Paris ON", lastVerified: "2026-04",
   },
   {
-    name: "Aire One Heating & Cooling", slug: "aire-one-heating-cooling", description: "35+ years serving Southwestern Ontario. 24/7 service, neighbour-style approach in Paris and Brant County.",
+    name: "Aire One Heating & Cooling", slug: "aire-one-heating-cooling", description: "24/7 HVAC services for Paris and Brant County. Furnace, heat pump, AC, and water heater installation and repair.",
     categorySlug: "hvac", categoryName: "Heating & Cooling",
     services: ["Furnace", "Heat Pump", "Air Conditioning", "Water Heater", "Air Quality", "24/7 Service"],
     city: "Paris", province: "ON", verified: true, featured: false, emergency247: true,
