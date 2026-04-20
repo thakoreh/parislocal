@@ -81,15 +81,32 @@ export default function GuidesPage() {
       {/* Hero */}
       <section style={{
         position: "relative",
-        background: "linear-gradient(135deg, #1a3a32 0%, #0d2820 100%)",
-        padding: "80px 24px 60px",
         overflow: "hidden",
+        padding: "80px 24px 60px",
+        background: "#1a3a32",
       }}>
+        {/* Paris river background */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          backgroundImage: "url('/images/hero-paris-river.jpg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          opacity: 0.25,
+          zIndex: 1,
+        }} />
+        {/* Dark overlay for text readability */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(135deg, rgba(26,58,50,0.85) 0%, rgba(13,40,32,0.9) 100%)",
+          zIndex: 2,
+        }} />
         {/* Decorative circles */}
-        <div style={{ position: "absolute", top: -60, right: -60, width: 300, height: 300, borderRadius: "50%", background: "rgba(61,124,107,0.15)", pointerEvents: "none" }} />
-        <div style={{ position: "absolute", bottom: -40, left: "30%", width: 200, height: 200, borderRadius: "50%", background: "rgba(61,124,107,0.1)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", top: -60, right: -60, width: 300, height: 300, borderRadius: "50%", background: "rgba(61,124,107,0.12)", pointerEvents: "none", zIndex: 3 }} />
+        <div style={{ position: "absolute", bottom: -40, left: "30%", width: 200, height: 200, borderRadius: "50%", background: "rgba(61,124,107,0.08)", pointerEvents: "none", zIndex: 3 }} />
 
-        <div style={{ maxWidth: 900, margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <div style={{ maxWidth: 900, margin: "0 auto", position: "relative", zIndex: 4 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 20 }}>
             <span style={{ background: "rgba(251,191,36,0.15)", color: "#fbbf24", fontSize: "0.8rem", fontWeight: 600, padding: "4px 12px", borderRadius: 20 }}>
               <BookOpen size={12} style={{ display: "inline", marginRight: 4 }} />
