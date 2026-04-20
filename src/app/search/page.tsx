@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, Suspense } from "react";
+import { useState, useEffect, Suspense } from "react";
 
 ;
 import { useQuery } from "convex/react";
@@ -26,35 +26,23 @@ function RatingStars({ rating }: { rating: number }) {
   );
 }
 
-const servingAreas = ["Paris"];
-
 function SearchContent() {
   const searchParams = useSearchParams();
   const initialQuery = searchParams.get("q") || "";
   const initialCategory = searchParams.get("category") || "";
-  const initialLocation = searchParams.get("location") || "";
 
   const [query, setQuery] = useState(initialQuery);
   const [category, setCategory] = useState(initialCategory);
-  const [location, setLocation] = useState(initialLocation);
 
   useEffect(() => {
     setQuery(searchParams.get("q") || "");
     setCategory(searchParams.get("category") || "");
-    setLocation(searchParams.get("location") || "");
   }, [searchParams]);
 
   const categories = useQuery(api.categories.list);
   const allBusinesses = useQuery(api.businesses.list, { search: query || undefined, categorySlug: category || undefined }) as ConvexBusiness[] | undefined;
 
-  const results: ConvexBusiness[] = useMemo(() => {
-    if (!allBusinesses) return [];
-    if (!location) return allBusinesses;
-    const loc = location.toLowerCase();
-    return allBusinesses.filter(
-      (b) => b.city.toLowerCase().includes(loc) || b.address.toLowerCase().includes(loc)
-    );
-  }, [allBusinesses, location]);
+  const results: ConvexBusiness[] = allBusinesses ?? [];
 
   return (
     <div>
@@ -75,16 +63,10 @@ function SearchContent() {
                 style={{ border: "none", boxShadow: "none", background: "transparent", padding: "10px 0" }}
               />
             </div>
-            <select className="input-field" value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: "auto", minWidth: 160, background: "var(--bg-card)", cursor: "pointer" }}>
+            <select className="input-field" value={category} onChange={(e) => setCategory(e.target.value)} style={{ width: "auto", minWidth: 160, background: "var(--card-bg)", cursor: "pointer" }}>
               <option value="">All Categories</option>
               {categories?.map((cat: any) => (
                 <option key={cat.slug} value={cat.slug}>{cat.name}</option>
-              ))}
-            </select>
-            <select className="input-field" value={location} onChange={(e) => setLocation(e.target.value)} style={{ width: "auto", minWidth: 140, background: "var(--bg-card)", cursor: "pointer" }}>
-              <option value="">All Locations</option>
-              {servingAreas.map((area) => (
-                <option key={area} value={area}>{area}</option>
               ))}
             </select>
           </div>
@@ -97,8 +79,8 @@ function SearchContent() {
             <p style={{ fontSize: "1rem", color: "var(--text-secondary)", fontWeight: 500 }}>
               {results.length} {results.length === 1 ? "business" : "businesses"} found{query ? ` for "${query}"` : ""}
             </p>
-            {(query || category || location) && (
-              <button className="btn-secondary" style={{ fontSize: "0.85rem", padding: "8px 16px" }} onClick={() => { setQuery(""); setCategory(""); setLocation(""); }}>
+            {(query || category) && (
+              <button className="btn-secondary" style={{ fontSize: "0.85rem", padding: "8px 16px" }} onClick={() => { setQuery(""); setCategory(""); }}>
                 Clear Filters
               </button>
             )}
@@ -157,7 +139,7 @@ function SearchContent() {
               </p>
               <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
                 <Link href="/categories" className="btn-primary" style={{ textDecoration: "none" }}>Browse Categories</Link>
-                <button className="btn-secondary" onClick={() => { setQuery(""); setCategory(""); setLocation(""); }}>Clear Filters</button>
+                <button className="btn-secondary" onClick={() => { setQuery(""); setCategory(""); }}>Clear Filters</button>
               </div>
             </div>
           )}

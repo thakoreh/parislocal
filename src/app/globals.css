@@ -512,3 +512,91 @@ body {
   color: var(--text);
   font-weight: 600;
 }
+
+/* ══════════════════════════════════════════════════
+   MOBILE-FIRST RESPONSIVE OVERRIDES
+   Handles inline gridTemplateColumns that override
+   data-grid CSS rules
+   ══════════════════════════════════════════════════ */
+
+/* Guides page — featured guide 2-col grid */
+@media (max-width: 768px) {
+  section [style*="gridTemplateColumns: \"1fr 1fr\""] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Homepage — Paris landmark cards auto-fit grid */
+@media (max-width: 640px) {
+  section [style*="gridTemplateColumns: repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Emergency page — auto-fit cards */
+@media (max-width: 640px) {
+  section [style*="gridTemplateColumns: repeat(auto-fit"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Search page — fix select dropdowns stacking on mobile */
+@media (max-width: 640px) {
+  section [style*="gap: 12"][style*="flexWrap"] {
+    flex-direction: column;
+    gap: 8px;
+  }
+  section [style*="gap: 12"][style*="flexWrap"] > * {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* Emergency — hospital cards 2-col on tablet, 1-col on mobile */
+@media (max-width: 768px) {
+  section [style*="gridTemplateColumns: \"1fr auto\""] {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+}
+
+/* Homepage hero search bar — stack on mobile */
+@media (max-width: 640px) {
+  .hero-gradient [style*="gap: 4"][style*="padding: 6"] {
+    flex-direction: column !important;
+    gap: 8px !important;
+    padding: 12px !important;
+  }
+  .hero-gradient [style*="gap: 4"][style*="padding: 6"] > * {
+    width: 100% !important;
+  }
+  .hero-gradient [style*="gap: 4"][style*="padding: 6"] button {
+    width: 100% !important;
+    justify-content: center !important;
+  }
+}
+
+/* Homepage stats row */
+@media (max-width: 480px) {
+  [style*="justifyContent: center"][style*="gap: 32"] {
+    gap: 16px !important;
+    flex-wrap: wrap !important;
+  }
+}
+
+/* Search results grid */
+@media (max-width: 640px) {
+  [data-responsive="2col"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Guides page category header divider line */
+@media (max-width: 640px) {
+  [style*="flex: 1, height: 1"][style*="background: var(--border)"] {
+    display: none !important;
+  }
+  div[style*="display: flex"][style*="alignItems: center"][style*="gap: 16"] {
+    flex-wrap: wrap !important;
+  }
+}
