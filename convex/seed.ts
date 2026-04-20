@@ -620,6 +620,36 @@ const events = [
     featured: false,
     source: "Paris Lions Club — annual summer fundraiser",
   },
+  {
+    title: "Paris Santa Claus Parade",
+    slug: "paris-santa-claus-parade",
+    description: "The annual Santa Claus Parade through downtown Paris, a tradition for families in the County of Brant.",
+    date: "2026-11-20T18:00:00.000Z",
+    location: "Downtown Paris, Ontario (Grand River Street North)",
+    category: "community" as const,
+    featured: false,
+    source: "Paris Lions Club — annual community tradition",
+  },
+  {
+    title: "Canada Day at the Grand River",
+    slug: "canada-day-paris-ontario",
+    description: "Canada Day celebrations along the Grand River in Paris, Ontario with fireworks, live music, and family activities.",
+    date: "2026-07-01T12:00:00.000Z",
+    location: "Paris, Ontario — Grand River Waterfront",
+    category: "community" as const,
+    featured: true,
+    source: "County of Brant — annual Canada Day event",
+  },
+  {
+    title: "Paris Thursday Night Market",
+    slug: "paris-thursday-night-market",
+    description: "Weekly summer market on Thursday evenings in Paris, Ontario featuring local vendors, food trucks, and live music.",
+    date: "2026-07-02T17:00:00.000Z",
+    location: "Paris Fairgrounds, Georgia Pacific Avenue, Paris, ON",
+    category: "market" as const,
+    featured: false,
+    source: "Paris Fairgrounds — weekly summer market",
+  },
 ];
 
 const guides = [
@@ -790,6 +820,135 @@ Despite its small size, Paris has a surprisingly vibrant food scene. Here are th
     category: "dining" as const,
     published: true,
     order: 4,
+  },
+  {
+    title: "Your Complete Guide to Paris, Ontario",
+    slug: "complete-guide-paris-ontario",
+    description: "Everything you need to know about Paris, Ontario — from its 185-year history to finding trusted local services, recreation on the Grand River, and community resources.",
+    content: `
+    <h2>Welcome to Paris, Ontario</h2>
+    <p>Paris, Ontario is a town of 14,956 people (2021 Census) in the County of Brant, Ontario. Situated at the junction of the Grand River and Highway 403, it's roughly 100 km from Toronto and 15 km from Brantford. The town is perhaps best known for its distinctive cobblestone architecture and its scenic location on the Grand River.</p>
+    <p>Despite bearing the name of the French capital, Paris, Ontario has no connection to France — its name comes entirely from a local geology quirk. Gypsum deposits were discovered here in 1793, and the gypsum from this area was used to make Plaster of Paris, the compound used in construction and medicine. The town was named accordingly.</p>
+    
+    <h2>A Brief History</h2>
+    <p>Paris was founded in 1850 and incorporated as a town in 1856. For 143 years it operated as an independent municipality before amalgamating into the County of Brant in 1999. Harrowsmith Magazine famously dubbed it "The Prettiest Little Town in Canada" — a nickname that still appears on local signage today.</p>
+    <p>The town has a rich industrial heritage, including the aforementioned gypsum mining, wool processing, and iron founding. In 1876, Paris was part of one of the world's first telephone transmissions when Alexander Graham Bell's equipment carried a message between Brantford and Paris.</p>
+    
+    <h2>Cobblestone Architecture</h2>
+    <p>Paris is known as the "Cobblestone Capital of Canada" with 12 or more historic cobblestone buildings concentrated in the downtown core. The distinctive rounded stones — many sourced locally from the prehistoric Lake Iroquois shoreline — give buildings a texture found almost nowhere else in Canada. St. James Church (1839) is among the oldest surviving examples.</p>
+    
+    <h2>The Grand River</h2>
+    <p>The Grand River flows through the centre of Paris, providing the town with its most significant natural asset. Riverside walks offer views of the water and the historic downtown from multiple angles. The river is also used for kayaking and fishing, and several restaurants along its banks have patios with water views.</p>
+    
+    <h2>Finding Local Services</h2>
+    <p>ParisLocal's directory covers all major service categories — plumbing, electrical, HVAC, landscaping, restaurants, and more. Every business is verified for a local address in or near Paris, Ontario. Listings include direct phone numbers so you can contact businesses without going through a middleman.</p>
+  `,
+    category: "new-resident" as const,
+    published: true,
+    order: 5,
+  },
+  {
+    title: "Cobblestone Architecture: Walking Tour of Historic Paris, Ontario",
+    slug: "cobblestone-architecture-paris-ontario",
+    description: "Paris, Ontario has one of the finest collections of cobblestone buildings in North America. Here's a self-guided tour route and the stories behind the stones.",
+    content: `
+    <h2>The Cobblestone Capital of Canada</h2>
+    <p>Stand on the corner of Grand River Street North and you've likely already spotted them — buildings constructed from thousands of rounded stones, set in mortar rather than cut into bricks. These are cobblestone buildings, and Paris, Ontario has a greater concentration of them than almost any other town in Canada.</p>
+    <p>The stones are actually glacial erratics — rounded pebbles deposited by glacial activity and later exposed along the ancient shoreline of Lake Iroquois, which covered this area when the glaciers retreated. Local builders found the stones abundant and free, and the resulting buildings have survived for nearly two centuries.</p>
+    
+    <h2>Key Stops on the Tour</h2>
+    <p><strong>St. James Church (1839)</strong> — Perhaps the most photographed building in Paris, this church on the hill features exceptional cobblestone work on its front facade. The stones are notably varied in colour, from grey-brown to pinkish granite.</p>
+    <p><strong>Downtown Commercial Block</strong> — Several storefronts on Grand River Street North retain their original cobblestone lower courses, hidden in some cases behind later facade renovations. Look for the stones peeking out above modern brick.</p>
+    <p><strong>Residential Architecture</strong> — Side streets off the main drag contain several residential cobblestone structures, some still private homes. The texture and variation in these buildings is remarkable up close.</p>
+    
+    <h2>Why Cobblestone Endures</h2>
+    <p>The buildings have survived because cobblestone is extraordinarily durable — the stones are harder than the mortar that holds them, meaning they erode more slowly than brick. The visual texture also ages gracefully, developing patina rather than crumbling. Walking through downtown Paris today, you're seeing essentially the same scene that residents would have seen in the 1850s.</p>
+    <p>The County of Brant has begun promoting the cobblestone buildings as a heritage tourism draw, though the tours remain informal — grab a coffee and walk the streets yourself. The buildings are best viewed in morning light.</p>
+  `,
+    category: "trail" as const,
+    published: true,
+    order: 6,
+  },
+  {
+    title: "The Grand River in Paris, Ontario: Views, Walks, and Water Activities",
+    slug: "grand-river-paris-ontario",
+    description: "The Grand River is the defining natural feature of Paris, Ontario. Here's where to access it, the best views, and what to do on and around the water.",
+    content: `
+    <h2>The Heart of Paris</h2>
+    <p>The Grand River runs through the centre of Paris, Ontario — or rather, Paris grew up around the crossing point where the river was narrow enough to bridge. The community's entire character was shaped by this waterway: the original mills were powered by its flow, the main street runs parallel to its banks, and the best patios in town face its waters.</p>
+    <p>The Grand River is one of Ontario's Heritage Rivers, designated for its cultural and recreational significance. In Paris, the river is relatively calm — wide and slow-moving — making it accessible for a range of activities.</p>
+    
+    <h2>Riverside Walks</h2>
+    <p>The most accessible way to experience the Grand River in Paris is on foot along the riverbank paths. The walking route along Grand River Street North offers views of the water with the downtown skyline as backdrop — particularly striking at sunrise when the historic buildings catch the light from the east.</p>
+    <p>A shorter riverside path runs behind the main commercial strip, connecting to the Paris Grand River Trail. The trail is popular with joggers and dog walkers and is passable year-round except during the heaviest spring floods.</p>
+    
+    <h2>Water Activities</h2>
+    <p>Kayaking and canoeing are popular on the Grand River in summer. The current is mild through Paris, making it suitable for beginners, though paddlers should check water levels after heavy rain. A public boat launch is available nearby for trailered craft.</p>
+    <p>Fishing is a year-round activity on this stretch of the Grand River. The river holds bass, pike, and walleye, though fishing pressure is moderate compared to more distant stretches. A valid Ontario fishing license is required.</p>
+    
+    <h2>River Patios</h2>
+    <p>The most popular warm-weather activity in Paris might simply be sitting on a river patio with food and drink. Several restaurants along Grand River Street North have decks and patios facing the water, making the most of the scenic backdrop. These tend to fill quickly on summer weekends.</p>
+  `,
+    category: "trail" as const,
+    published: true,
+    order: 7,
+  },
+  {
+    title: "Best Restaurants in Paris, Ontario: A Local's Guide",
+    slug: "best-restaurants-paris-ontario",
+    description: "From riverside dining to classic pubs, here's a practical guide to dining in Paris, Ontario based on what's actually open and operating in 2026.",
+    content: `
+    <h2>The Paris, Ontario Dining Scene</h2>
+    <p>Paris, Ontario's restaurant scene reflects its character as a small town with strong local pride: independent operators, comfort food done well, and a handful of destinations worth driving to from neighbouring communities. The town doesn't have the density of a city centre, but the quality-to-price ratio is notably strong.</p>
+    <p>The dining scene clusters around Grand River Street North, with restaurants ranging from a riverside inn with a long history to newer farm-to-table operations and a couple of reliable pubs.</p>
+    
+    <h2>Fine Dining and Special Occasions</h2>
+    <p>For a sit-down dinner with table service, Paris Inn on Grand River Street North is the traditional choice. The restaurant has operated in various forms for decades and offers classic Canadian cuisine with views of the Grand River. It's been rated among the top restaurants in the Paris area on travel platforms.</p>
+    <p>Juniper Dining Co. on Elm Street offers a different approach — upscale casual with a focus on locally sourced ingredients. The menu changes with the seasons and the wine list has genuine depth for a town of 15,000.</p>
+    
+    <h2>Pubs and Casual Dining</h2>
+    <p>Cobblestone Public House occupies one of Paris's historic cobblestone buildings and is the default choice for casual pub fare, craft beer, and live music on weekends. The heritage setting is genuine — you're eating inside one of the buildings that defines Paris's character.</p>
+    <p>For pizza and takeout, Mario's Pizza on Dundas Street serves a no-frills menu that locals return to reliably.</p>
+    
+    <h2>Cafes and Light Bites</h2>
+    <p>Little Paris Bread Co. is a small-batch bakery worth seeking out for morning coffee and fresh bread. Check their hours before making a special trip — they're not open seven days a week.</p>
+    <p>Stillwaters Plate and Pour on Grand River Street North covers the casual bar-and-food niche with locally owned spirit.</p>
+    
+    <h2>Planning Your Dining Out</h2>
+    <p>Reservations are recommended for Friday and Saturday dinner at Paris Inn and Juniper Dining, particularly during summer patio season. The pubs operate on a first-come basis. Note that some smaller operators keep reduced winter hours — call ahead in the off-season.</p>
+  `,
+    category: "dining" as const,
+    published: true,
+    order: 8,
+  },
+  {
+    title: "New to Paris, Ontario? A Resident's Guide to Getting Settled",
+    slug: "new-resident-guide-paris-ontario",
+    description: "Just moved to Paris, Ontario? Here's what you need to know — from finding a family doctor to the best local coffee shops, trails, and community resources.",
+    content: `
+    <h2>Welcome to Paris</h2>
+    <p>Paris, Ontario is a small town that punches above its weight for quality of life. With 14,956 residents (2021 Census), it's large enough to have real services and a functioning downtown, but small enough that you'll recognize the person at the grocery store checkout. Getting settled is straightforward if you know where to look.</p>
+    
+    <h2>Finding a Family Doctor</h2>
+    <p>This is the most common frustration for new residents in smaller Ontario towns. The Brant County Health Team (bchc.ca) maintains a physician waitlist for the area. Register with Health Care Connect (ontario.ca/healthcareconnect) to be placed on the registry. In the meantime, walk-in clinics are available in Brantford, a 15-minute drive.</p>
+    
+    <h2>Utilities and Municipal Services</h2>
+    <p>Water and sewer services in Paris are provided by the County of Brant. Property taxes are also administered by the County. Report utility issues through the County of Brant website (brant.ca) or by calling the public works department.</p>
+    <p>Electricity is provided by Brantford Power or Hydro One depending on your exact location — check your address on the Ontario Energy Board's website to confirm your retailer.</p>
+    
+    <h2>Schools</h2>
+    <p>Paris has two public elementary schools and one public high school (Paris District High School, founded 1923). The Conseil scolaire Viamonde operates French-language education in the area. Catholic education is available through the Brant Haldimand Norfolk Catholic District School Board.</p>
+    
+    <h2>Getting Around</h2>
+    <p>You need a car in Paris — like most Ontario towns outside the GTA, Paris has no public transit. Highway 403 runs adjacent to town, providing quick access to Brantford (15 min), Hamilton (40 min), and Woodstock (30 min). The QEW is accessible via Hamilton for trips to Niagara.</p>
+    
+    <h2>Community Connection</h2>
+    <p>The Paris Branch of the County of Brant Public Library (a Carnegie Library building) is the community's information hub and a good first stop for library cards, community bulletin boards, and program information. The library also hosts events and workshops year-round.</p>
+    <p>For local news, the Brantford Expositor covers Paris regularly. The Paris Star (local online news) and the County of Brant website are good sources for municipal information. Facebook community groups like "Ask! Paris, Ontario" are active sources of local recommendations.</p>
+  `,
+    category: "new-resident" as const,
+    published: true,
+    order: 9,
   },
 ];
 

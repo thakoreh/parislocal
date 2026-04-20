@@ -65,6 +65,7 @@ export default defineSchema({
   // Local events
   events: defineTable({
     title: v.string(),
+    slug: v.optional(v.string()),
     description: v.string(),
     date: v.string(),
     endDate: v.optional(v.string()),
