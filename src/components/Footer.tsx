@@ -29,7 +29,7 @@ export default function Footer() {
                 <MapPin size={16} color="#fff" />
               </div>
               <span style={{ fontFamily: "var(--font-display)", fontSize: "1.2rem", fontWeight: 800, color: "#fff" }}>
-                Paris<span style={{ color: "#c67f3b" }}>.</span>Local
+                Paris<span style={{ color: "var(--accent)" }}>.</span>Local
               </span>
             </div>
             <p style={{ color: "#94a3b8", fontSize: "0.875rem", lineHeight: 1.7, maxWidth: 280 }}>
@@ -44,7 +44,7 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: "0.75rem", fontWeight: 700, color: "#c67f3b", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Explore</h4>
+            <h4 style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Explore</h4>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 10 }}>
               {links.map((l) => (
                 <Link key={l.href} href={l.href} style={{ color: "#94a3b8", fontSize: "0.85rem", textDecoration: "none" }}>{l.label}</Link>
@@ -54,7 +54,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 style={{ fontSize: "0.75rem", fontWeight: 700, color: "#c67f3b", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Contact</h4>
+            <h4 style={{ fontSize: "0.75rem", fontWeight: 700, color: "var(--accent)", textTransform: "uppercase", letterSpacing: "0.08em", marginBottom: 16 }}>Contact</h4>
             <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
               <a href="mailto:hello@parislocal.ca" style={{ display: "flex", alignItems: "center", gap: 8, color: "#94a3b8", fontSize: "0.85rem", textDecoration: "none" }}>
                 <Mail size={14} style={{ color: "#64748b" }} /> hello@parislocal.ca
@@ -72,7 +72,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} ParisLocal. All rights reserved.
           </span>
           <span style={{ color: "#475569", fontSize: "0.8rem", display: "flex", alignItems: "center", gap: 4 }}>
-            Made with <Heart size={12} style={{ color: "#c67f3b" }} /> in Paris, ON
+            Made with <Heart size={12} style={{ color: "var(--accent)" }} /> in Paris, ON
           </span>
         </div>
       </div>

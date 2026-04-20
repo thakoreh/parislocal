@@ -139,7 +139,7 @@ export default function Home() {
           }}>
             Find Trusted Local Services
             <br />
-            <span style={{ color: "#c67f3b" }}>
+            <span style={{ color: "var(--accent)" }}>
               In Your Neighbourhood
             </span>
           </h1>

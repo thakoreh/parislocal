@@ -26,7 +26,7 @@ export default function CategoriesPage() {
     <div>
       <section className="hero-gradient" style={{ padding: "120px 24px 60px", position: "relative" }}>
         <div style={{ maxWidth: 800, margin: "0 auto", textAlign: "center", position: "relative", zIndex: 1 }}>
-          <span className="section-badge" style={{ marginBottom: 24, background: "rgba(245, 158, 11, 0.15)", color: "#fbbf24" }}>
+          <span className="section-badge" style={{ marginBottom: 24 }}>
             <Search size={14} />
             Browse Services
           </span>
