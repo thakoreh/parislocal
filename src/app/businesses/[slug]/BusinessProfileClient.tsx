@@ -93,7 +93,7 @@ export default function BusinessProfileClient() {
                 )}
 
                 <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  {business.verified && <span className="verified-badge"><Shield size={12} />Verified</span>}
+                  {business.verified && <span className="verified-badge"><Shield size={12} />Listed</span>}
                   {business.featured && <span className="featured-badge"><Award size={12} />Featured</span>}
                 </div>
               </div>

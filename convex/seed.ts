@@ -100,6 +100,8 @@ const businesses = [
     name: "Chasles Plumbing Professionals", slug: "chasles-plumbing", description: "Experienced plumbers for residential and commercial work in the Paris area.",
     categorySlug: "plumbing", categoryName: "Plumbing",
     services: ["Residential Plumbing", "Commercial Plumbing", "Repairs", "Installation", "Emergency Service"],
+    phone: "(519) 442-6200", email: "info@chaslesplumbing.com", website: "https://chaslesplumbing.com",
+    address: "67 Grand River St N, Paris, ON N3L 2T5",
     city: "Paris", province: "ON", verified: true, featured: true, emergency247: true,
     tags: ["plumber", "residential", "commercial", "emergency", "24/7"],
     source: "chaslesplumbing.com — company website, verified Paris ON address", lastVerified: "2026-04",

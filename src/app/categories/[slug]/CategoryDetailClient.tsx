@@ -137,7 +137,7 @@ export default function CategoryDetailClient() {
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                         <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text)" }}>{business.name}</h3>
                         {business.verified && (
-                          <span className="verified-badge"><CheckCircle size={12} />Verified</span>
+                          <span className="verified-badge"><CheckCircle size={12} />Listed</span>
                         )}
                       </div>
                       {business.rating && (

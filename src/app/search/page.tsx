@@ -94,7 +94,7 @@ function SearchContent() {
                     <div>
                       <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                         <h3 style={{ fontSize: "1.1rem", fontWeight: 700, color: "var(--text)" }}>{business.name}</h3>
-                        {business.verified && <span className="verified-badge"><Shield size={12} />Verified</span>}
+                        {business.verified && <span className="verified-badge"><Shield size={12} />Listed</span>}
                       </div>
                       {business.rating && (
                         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
