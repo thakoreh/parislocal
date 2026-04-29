@@ -24,5 +24,6 @@
     "eslint-config-next": "16.2.4",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "description": "Local business directory for Paris, Ontario. Find restaurants, shops, services, and community events."
 }
