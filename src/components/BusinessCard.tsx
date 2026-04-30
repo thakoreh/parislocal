@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { MapPin, Phone, Star, Shield, Award, ArrowRight } from "lucide-react";
+import { useState, useCallback } from "react";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
+import { Id } from "../../convex/_generated/dataModel";
+import { MapPin, Phone, Star, Shield, Award, ArrowRight, ThumbsUp } from "lucide-react";
 import type { ConvexBusiness } from "@/types/convex";
 
 interface BusinessCardProps {
@@ -20,9 +24,15 @@ interface BusinessCardProps {
     | "verified"
     | "featured"
     | "description"
+    | "upvoteCount"
   >;
   /** Grid variant adds hover lift + accent top-border via .category-card */
   variant?: "default" | "grid";
+  /** Whether the current session has upvoted this business */
+  hasUpvoted?: boolean;
+  /** Called when upvote changes */
+  onUpvoteChange?: (businessId: string, newCount: number, hasUpvoted: boolean) => void;
+  /** Grid variant adds hover lift + accent top-border via .category-card */
 }
 
 function RatingStars({ rating }: { rating: number }) {
@@ -41,26 +51,88 @@ function RatingStars({ rating }: { rating: number }) {
   );
 }
 
+function getSessionId() {
+  if (typeof window === "undefined") return "";
+  let id = localStorage.getItem("parislocal_session_id");
+  if (!id) {
+    id = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    localStorage.setItem("parislocal_session_id", id);
+  }
+  return id;
+}
+
 export default function BusinessCard({
   business,
   variant = "default",
+  hasUpvoted = false,
+  onUpvoteChange,
 }: BusinessCardProps) {
   const cardClass = variant === "grid" ? "card category-card" : "card";
+  const [upvoted, setUpvoted] = useState(hasUpvoted);
+  const [count, setCount] = useState(business.upvoteCount ?? 0);
+  const [optimisticLoading, setOptimisticLoading] = useState(false);
+
+  const toggleUpvote = useMutation(api.businesses.toggleUpvote);
+
+  const handleUpvote = useCallback(
+    async (e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      if (optimisticLoading) return;
+
+      setOptimisticLoading(true);
+      const sessionId = getSessionId();
+      const wasUpvoted = upvoted;
+      const wasCount = count;
+
+      // Optimistic update
+      setUpvoted(!wasUpvoted);
+      setCount(wasUpvoted ? wasCount - 1 : wasCount + 1);
+
+      try {
+        const result = await toggleUpvote({
+          businessId: business._id as Id<"businesses">,
+          sessionId,
+        });
+        // Sync with server result
+        setUpvoted(result.action === "added");
+        setCount(result.action === "added" ? wasCount + 1 : wasCount - 1);
+        onUpvoteChange?.(business._id, result.action === "added" ? wasCount + 1 : wasCount - 1, result.action === "added");
+      } catch {
+        // Revert on error
+        setUpvoted(wasUpvoted);
+        setCount(wasCount);
+      } finally {
+        setOptimisticLoading(false);
+      }
+    },
+    [business._id, count, onUpvoteChange, optimisticLoading, toggleUpvote, upvoted]
+  );
 
   return (
-    <Link
-      href={`/businesses/${business.slug}`}
-      style={{ textDecoration: "none", display: "block" }}
-    >
-      <article
-        className={cardClass}
+    <div className={cardClass} style={{ padding: "var(--space-6)", height: "100%", display: "flex", flexDirection: "column", gap: "var(--space-3)", position: "relative" }}>
+      {/* Upvote button - top right, outside Link */}
+      <button
+        onClick={handleUpvote}
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all min-h-[36px] min-w-[44px] justify-center"
         style={{
-          padding: "var(--space-6)",
-          height: "100%",
-          display: "flex",
-          flexDirection: "column",
-          gap: "var(--space-3)",
+          position: "absolute",
+          top: "var(--space-4)",
+          right: "var(--space-4)",
+          background: upvoted ? "var(--primary)" : "transparent",
+          border: `1.5px solid ${upvoted ? "var(--primary)" : "var(--border)"}`,
+          color: upvoted ? "white" : "var(--text-muted)",
+          zIndex: 2,
         }}
+        aria-label={upvoted ? "Remove upvote" : "Upvote this business"}
+      >
+        <ThumbsUp size={12} />
+        <span>{count}</span>
+      </button>
+
+      <Link
+        href={`/businesses/${business.slug}`}
+        style={{ textDecoration: "none", display: "contents" }}
       >
         {/* Header row */}
         <div
@@ -71,7 +143,7 @@ export default function BusinessCard({
             gap: "var(--space-3)",
           }}
         >
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ flex: 1, minWidth: 0, paddingRight: "48px" }}>
             {/* Category badge */}
             <span
               className="section-badge"
@@ -211,7 +283,7 @@ export default function BusinessCard({
             View profile <ArrowRight size={12} />
           </span>
         </div>
-      </article>
-    </Link>
+      </Link>
+    </div>
   );
 }

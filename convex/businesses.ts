@@ -33,7 +33,18 @@ export const list = query({
       );
     }
 
-    return results;
+    // Attach upvote counts
+    const businessIds = results.map((b) => b._id);
+    const upvoteCounts: Record<string, number> = {};
+    for (const id of businessIds) {
+      const upvotes = await ctx.db
+        .query("upvotes")
+        .withIndex("by_business", (q) => q.eq("businessId", id))
+        .collect();
+      upvoteCounts[id] = upvotes.length;
+    }
+
+    return results.map((b) => ({ ...b, upvoteCount: upvoteCounts[b._id] ?? 0 }));
   },
 });
 
@@ -53,7 +64,16 @@ export const getFeatured = query({
     const q = ctx.db
       .query("businesses")
       .withIndex("by_featured", (q) => q.eq("featured", true));
-    return await q.take(args.limit ?? 6);
+    const results = await q.take(args.limit ?? 6);
+    const upvoteCounts: Record<string, number> = {};
+    for (const b of results) {
+      const upvotes = await ctx.db
+        .query("upvotes")
+        .withIndex("by_business", (q) => q.eq("businessId", b._id))
+        .collect();
+      upvoteCounts[b._id] = upvotes.length;
+    }
+    return results.map((b) => ({ ...b, upvoteCount: upvoteCounts[b._id] ?? 0 }));
   },
 });
 

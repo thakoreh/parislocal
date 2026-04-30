@@ -1,4 +1,5 @@
 // Convex business type (matches what comes from the backend)
+// NOTE: _id should be Id<"businesses"> from Convex generated types
 export interface ConvexBusiness {
   _id: string;
   _creationTime: number;
@@ -28,6 +29,7 @@ export interface ConvexBusiness {
   imageUrl?: string;
   source: string;
   lastVerified: string;
+  upvoteCount?: number;
 }
 
 // Convex category type
