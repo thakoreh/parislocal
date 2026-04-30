@@ -14,6 +14,7 @@ import {
 import { useRouter } from "next/navigation";
 import FAQSection from "@/components/FAQSection";
 import BusinessCard from "@/components/BusinessCard";
+import { ThisDayInParis } from "@/components/ThisDayInParis";
 import type { ConvexBusiness, ConvexCategory } from "@/types/convex";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; color?: string; style?: React.CSSProperties }>> = {
@@ -402,6 +403,11 @@ export default function Home() {
 
       {/* ===== FAQ ===== */}
       <FAQSection />
+
+      {/* ===== This Day in Paris History ===== */}
+      <section style={{ padding: "0 24px 48px", maxWidth: 1200, margin: "0 auto" }}>
+        <ThisDayInParis />
+      </section>
     </div>
   );
 }

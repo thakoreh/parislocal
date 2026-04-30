@@ -93,3 +93,68 @@ export const create = mutation({
     });
   },
 });
+
+// Upvote count for a single business
+export const getUpvotes = query({
+  args: { businessId: v.id("businesses") },
+  handler: async (ctx, args) => {
+    const upvotes = await ctx.db
+      .query("upvotes")
+      .withIndex("by_business", (q) => q.eq("businessId", args.businessId))
+      .collect();
+    return upvotes.length;
+  },
+});
+
+// Upvote count for all businesses (batch)
+export const getUpvotesBatch = query({
+  args: { businessIds: v.array(v.id("businesses")) },
+  handler: async (ctx, args) => {
+    const result: Record<string, number> = {};
+    for (const id of args.businessIds) {
+      const upvotes = await ctx.db
+        .query("upvotes")
+        .withIndex("by_business", (q) => q.eq("businessId", id))
+        .collect();
+      result[id] = upvotes.length;
+    }
+    return result;
+  },
+});
+
+// Toggle upvote (add if not exists, remove if exists)
+export const toggleUpvote = mutation({
+  args: { businessId: v.id("businesses"), sessionId: v.string() },
+  handler: async (ctx, args) => {
+    const existing = await ctx.db
+      .query("upvotes")
+      .withIndex("by_session_business", (q) =>
+        q.eq("sessionId", args.sessionId).eq("businessId", args.businessId)
+      )
+      .first();
+
+    if (existing) {
+      await ctx.db.delete(existing._id);
+      return { action: "removed" as const };
+    } else {
+      await ctx.db.insert("upvotes", {
+        businessId: args.businessId,
+        sessionId: args.sessionId,
+        createdAt: Date.now(),
+      });
+      return { action: "added" as const };
+    }
+  },
+});
+
+// Get which businesses a session has upvoted
+export const getMyUpvotes = query({
+  args: { sessionId: v.string() },
+  handler: async (ctx, args) => {
+    const upvotes = await ctx.db
+      .query("upvotes")
+      .filter((q) => q.eq(q.field("sessionId"), args.sessionId))
+      .collect();
+    return upvotes.map((u) => u.businessId);
+  },
+});

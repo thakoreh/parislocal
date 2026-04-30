@@ -99,4 +99,13 @@ export default defineSchema({
     message: v.string(),
     submittedAt: v.number(),
   }),
+
+  // Community upvotes for businesses (prevent double-voting by session)
+  upvotes: defineTable({
+    businessId: v.id("businesses"),
+    sessionId: v.string(), // localStorage-generated UUID
+    createdAt: v.number(),
+  })
+    .index("by_business", ["businessId"])
+    .index("by_session_business", ["sessionId", "businessId"]),
 });

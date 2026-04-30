@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/categories", label: "Categories" },
   { href: "/events", label: "Events" },
   { href: "/guides", label: "Guides" },
+  { href: "/photo-challenge", label: "📸 Photo Challenge" },
   { href: "/search", label: "Search", icon: Search },
   { href: "/emergency", label: "Emergency" },
   { href: "/list-your-business", label: "List Your Business", highlight: true },
